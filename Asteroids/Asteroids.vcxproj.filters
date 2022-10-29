@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Resource Files\images">
+      <UniqueIdentifier>{ee0305a1-4103-4ed4-99fe-8de505806bdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\images\icon">
+      <UniqueIdentifier>{3a460deb-506e-4fc6-ad1a-c3895f36ba04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game">
+      <UniqueIdentifier>{5c94f4d3-de6d-48e5-a98b-bf132a116d47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{3d5ecfb0-c092-4809-b0c2-4bb85fbcc548}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Resources">
+      <UniqueIdentifier>{c10957de-6acd-44c6-a1ae-ed1c26709682}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\levels">
+      <UniqueIdentifier>{4936863e-f3c1-4657-8573-d2d0afd7a259}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\levels">
+      <UniqueIdentifier>{aa38f4fe-b048-4e34-a166-9fe615cfd05e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\objects">
+      <UniqueIdentifier>{3965664b-4b6e-48d6-ae62-0a3010cf2998}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\objects">
+      <UniqueIdentifier>{16ed280b-0fe9-4601-9279-8bb2a5f8e377}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\ui">
+      <UniqueIdentifier>{08b0b593-0680-42f0-926b-99035e8ca7e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\ui">
+      <UniqueIdentifier>{1bc0c557-63cf-4f30-bf54-5c216d32a3a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\ui\Play">
+      <UniqueIdentifier>{94301c0e-1462-425b-b02d-04a37ff985ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\ui\Menu">
+      <UniqueIdentifier>{6c155801-67aa-4cf1-90ee-2e5718d4c65f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\objects\Play">
+      <UniqueIdentifier>{50e0ba2e-8370-4240-87d4-7959db1ff419}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\objects\Play">
+      <UniqueIdentifier>{e1dc7869-e886-4c5b-abe8-c749740df3ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\ui\Play">
+      <UniqueIdentifier>{35aad5de-a847-4991-af16-856f1b99481d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\ui\Menu">
+      <UniqueIdentifier>{a312e605-e5d9-4548-83ae-42f3927d24a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\objects\Menu">
+      <UniqueIdentifier>{5bc434d5-9b0c-47bd-b0d7-43cbd47d6f6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\objects\Menu">
+      <UniqueIdentifier>{8329c26d-c9de-4775-8970-06a5bbc7e4f3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Play.cpp">
+      <Filter>Source Files\Game\levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Ufo.cpp">
+      <Filter>Source Files\Game\objects\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Asteroid.cpp">
+      <Filter>Source Files\Game\objects\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Game\objects\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Source Files\Game\objects\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Lives.cpp">
+      <Filter>Source Files\Game\ui\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>Source Files\Game\ui\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files\Game\levels</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="resource2.h">
+      <Filter>Header Files\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="resource1.h">
+      <Filter>Header Files\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Play.h">
+      <Filter>Header Files\Game\levels</Filter>
+    </ClInclude>
+    <ClInclude Include="Lives.h">
+      <Filter>Header Files\Game\ui\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>Header Files\Game\ui\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Ufo.h">
+      <Filter>Header Files\Game\objects\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Asteroid.h">
+      <Filter>Header Files\Game\objects\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Game\objects\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Header Files\Game\objects\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files\Game\levels</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\icon\icon.png">
+      <Filter>Resource Files\images\icon</Filter>
+    </Image>
+    <Image Include="icon\icon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="icon\icon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
