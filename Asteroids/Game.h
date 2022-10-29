@@ -14,6 +14,9 @@
 #include "Window.h"
 #include "Play.h"
 
+#define MENU 0
+#define PLAY 1
+
 class Game
 {
 private:
@@ -25,7 +28,7 @@ private:
 	Play levelPlay;
 	void initLevels();
 
-	void pollEvents();
+	void pollGlobalEvents();
 
 public:
 	Game();

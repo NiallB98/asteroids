@@ -16,7 +16,7 @@ void Game::initLevels()
 }
 
 // Reacts to input events that have occurred
-void Game::pollEvents()
+void Game::pollGlobalEvents()
 {
 	while (window.pollEvent(event))
 	{
@@ -38,11 +38,19 @@ void Game::pollEvents()
 // Handles frame by frame polling of events and game logic
 void Game::update()
 {
-	pollEvents();
+	pollGlobalEvents();
 
 	switch (currentLevel)
-	case 1:
+	{
+	case MENU:
+
+		break;
+	case PLAY:
 		levelPlay.update(event);
+		break;
+	default:
+		break;
+	}
 }
 
 // Controls rendering each new frame
@@ -52,7 +60,10 @@ void Game::render()
 
 	switch (currentLevel)
 	{
-	case 1:
+	case MENU:
+
+		break;
+	case PLAY:
 		levelPlay.draw(window);
 		break;
 	default:

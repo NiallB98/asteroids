@@ -17,7 +17,7 @@ class Window
 {
 private:
 	bool running = true;
-	std::string title = "Game Title";
+	std::string title = "Asteroids";
 	std::string iconPath = "icon/icon/png";
 
 	int width, height, fps;

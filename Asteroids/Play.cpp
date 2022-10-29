@@ -111,13 +111,13 @@ void Play::pollEvents(sf::Event& event)
 
 void Play::updatePlayer()
 {
-	player.update();
+	player.update(windowDimensions);
 }
 
 void Play::updateAsteroids()
 {
 	for (int i = 0; i < asteroids.size(); i++)
-		asteroids[i].update();
+		asteroids[i].update(windowDimensions);
 }
 
 // Handles polling events and game logic

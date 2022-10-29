@@ -11,9 +11,13 @@ private:
 	void initCollider();
 
 	// Shape
+	int vertices = 3 + 1;
+	sf::Color vertexColour = sf::Color::White;
 	sf::VertexArray shape;
 	void initShape();
+	void initVertexArray();
 	void updateVertexArray();
+	std::vector<sf::Vector2f> vertexRelPos = std::vector<sf::Vector2f>(vertices);
 
 	// Drawing
 	void drawCollider(Window&);
@@ -29,7 +33,8 @@ private:
 	float maxSpeed = 4.f;
 	float acceleration = 0.1f;
 
-	void updatePos();
+	void updatePos(sf::Vector2f);
+	void loopPos(sf::Vector2f);
 
 public:
 	Player();
@@ -42,7 +47,7 @@ public:
 
 	// Updating and events
 	void pollEvents(sf::Event&);
-	void update();
+	void update(sf::Vector2f);
 
 	void draw(Window&);
 };
