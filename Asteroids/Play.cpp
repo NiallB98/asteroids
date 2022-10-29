@@ -101,6 +101,7 @@ void Play::draw(Window& window)
 
 void Play::pollEvents(sf::Event& event)
 {
+	 // Player rotation
 	int rotationDir = 0;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 	{
@@ -114,10 +115,15 @@ void Play::pollEvents(sf::Event& event)
 	{
 		player.rotate(rotationDir + 1);
 	}
+
+	// Player forward movement
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+		player.accelerate();
 }
 
 // Handles polling events and game logic
 void Play::update(sf::Event& event)
 {
 	pollEvents(event);
+	player.update();
 }

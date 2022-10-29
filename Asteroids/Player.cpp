@@ -93,8 +93,28 @@ void Player::rotate(bool dir)
 	updateVertexArray();
 }
 
+void Player::accelerate()
+{
+	float accelerationX = acceleration * sinf(PI * rotationDegrees / 180.f);
+	float accelerationY = -acceleration * cosf(PI * rotationDegrees / 180.f);
+
+	speed = sf::Vector2f(speed.x + accelerationX, speed.y + accelerationY);
+
+	// Ensuring the overall speed has not exceeded the maximum limit
+	float overMaxSpeedFactor = (std::sqrtf(speed.x * speed.x + speed.y * speed.y) - maxSpeed) / maxSpeed;
+	if (overMaxSpeedFactor > 0.f)
+	{
+		speed = sf::Vector2f(speed.x - speed.x * overMaxSpeedFactor, speed.y - speed.y * overMaxSpeedFactor);
+	}
+}
+
+void Player::updatePos()
+{
+	setPos(sf::Vector2f(pos.x + speed.x, pos.y + speed.y));
+}
+
 // Update
 void Player::update()
 {
-
+	updatePos();
 }
