@@ -99,31 +99,32 @@ void Play::draw(Window& window)
 	drawUI(window);
 }
 
+void Play::pollPlayerEvents(sf::Event event)
+{
+	player.pollEvents(event);
+}
+
 void Play::pollEvents(sf::Event& event)
 {
-	 // Player rotation
-	int rotationDir = 0;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-	{
-		rotationDir++;
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-	{
-		rotationDir--;
-	}
-	if (rotationDir != 0)
-	{
-		player.rotate(rotationDir + 1);
-	}
+	pollPlayerEvents(event);
+}
 
-	// Player forward movement
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-		player.accelerate();
+void Play::updatePlayer()
+{
+	player.update();
+}
+
+void Play::updateAsteroids()
+{
+	for (int i = 0; i < asteroids.size(); i++)
+		asteroids[i].update();
 }
 
 // Handles polling events and game logic
 void Play::update(sf::Event& event)
 {
 	pollEvents(event);
-	player.update();
+
+	updatePlayer();
+	updateAsteroids();
 }

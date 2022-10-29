@@ -4,6 +4,7 @@ Asteroid::Asteroid()
 {
 	initCollider();
 	initShape();
+	setRandomVelocity();
 }
 
 Asteroid::~Asteroid()
@@ -58,4 +59,27 @@ void Asteroid::setPos(sf::Vector2f newPos)
 {
 	pos = newPos;
 	collider.setPosition(newPos);
+}
+
+void Asteroid::setRandomVelocity()
+{
+	float rotationDegrees = static_cast<float>(rand() % 360);
+
+	float newSpeed = minSpeed + (maxSpeed - minSpeed) * static_cast<float>(rand() % 1000) / 1000.f;
+
+	float sinFactor = sinf(PI * rotationDegrees / 180.f);
+	float cosFactor = cosf(PI * rotationDegrees / 180.f);
+
+	speed = sf::Vector2f(newSpeed * sinFactor, newSpeed * cosFactor);
+}
+
+// Updates
+void Asteroid::updatePos()
+{
+	setPos(sf::Vector2f(pos.x + speed.x, pos.y + speed.y));
+}
+
+void Asteroid::update()
+{
+	updatePos();
 }

@@ -23,11 +23,15 @@ private:
 
 	// Movement
 	sf::Vector2f pos = sf::Vector2f(0.f, 0.f);
-	float speed = 0.f;
-	float maxSpeed = 5.f;
-	float dirDegrees = 0.f;
-	float rotationSpeedCWDegrees = 0.f;
-	void rotate();
+	
+	float rotationSpeedDegrees = 0.f;
+	
+	sf::Vector2f speed = sf::Vector2f(0.f, 0.f);
+	float minSpeed = 1.f;
+	float maxSpeed = 4.f;
+	void setRandomVelocity();
+
+	void updatePos();
 
 public:
 	Asteroid();
@@ -37,8 +41,9 @@ public:
 
 	// Movement
 	void setPos(sf::Vector2f);
-	void setRandomVelocity();
-	void move();
+
+	// Update
+	void update();
 
 	void draw(Window&);
 };

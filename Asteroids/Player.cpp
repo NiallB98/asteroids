@@ -113,6 +113,28 @@ void Player::updatePos()
 	setPos(sf::Vector2f(pos.x + speed.x, pos.y + speed.y));
 }
 
+void Player::pollEvents(sf::Event& event)
+{
+	// Rotation
+	int rotationDir = 0;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+	{
+		rotationDir++;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+	{
+		rotationDir--;
+	}
+	if (rotationDir != 0)
+	{
+		rotate(rotationDir + 1);
+	}
+
+	// Forward movement
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+		accelerate();
+}
+
 // Update
 void Player::update()
 {

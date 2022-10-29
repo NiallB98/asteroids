@@ -24,6 +24,13 @@ private:
 	int score = 0;
 	int lives = 3;
 
+	// Polling events
+	void pollPlayerEvents(sf::Event);
+
+	// Updating
+	void updatePlayer();
+	void updateAsteroids();
+
 	// Drawing
 	void drawAsteroids(Window&);
 	void drawPlayer(Window&);

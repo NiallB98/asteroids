@@ -40,7 +40,8 @@ public:
 	void rotate(bool);
 	void accelerate();
 
-	// Update
+	// Updating and events
+	void pollEvents(sf::Event&);
 	void update();
 
 	void draw(Window&);
