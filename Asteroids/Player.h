@@ -1,12 +1,13 @@
 #pragma once
 
 #include "Window.h"
+#include "Asteroid.h"
 
 class Player
 {
 private:
 	// Collider
-	bool doDrawCollider = false;
+	bool doDrawCollider = true;
 	sf::CircleShape collider;
 	void initCollider();
 
@@ -36,6 +37,10 @@ private:
 	void updatePos(sf::Vector2f);
 	void loopPos(sf::Vector2f);
 
+	// Collsion checking
+	bool collisionWithAsteroids(std::vector<Asteroid>&);
+	bool collisionChecks(std::vector<Asteroid>&);
+
 public:
 	Player();
 	~Player();
@@ -47,7 +52,7 @@ public:
 
 	// Updating and events
 	void pollEvents(sf::Event&);
-	void update(sf::Vector2f);
+	void update(sf::Vector2f, std::vector<Asteroid>&);
 
 	void draw(Window&);
 };

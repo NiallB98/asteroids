@@ -69,6 +69,11 @@ void Window::draw(sf::ConvexShape conv)
 	window->draw(conv);
 }
 
+void Window::draw(sf::Text text)
+{
+	window->draw(text);
+}
+
 void Window::draw(sf::VertexArray vertArr)
 {
 	window->draw(vertArr);

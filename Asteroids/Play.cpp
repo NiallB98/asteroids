@@ -16,7 +16,7 @@ Play::Play(sf::Vector2f windowDims, int num)
 
 Play::~Play()
 {
-
+	
 }
 
 void Play::updateWindowDimensions(sf::Vector2f windowDims)
@@ -70,26 +70,33 @@ void Play::drawAsteroids(Window& window)
 	}
 }
 
+void Play::drawProjectiles(Window& window)
+{
+	projectile.draw(window);
+}
+
 void Play::drawObjects(Window& window)
 {
 	drawAsteroids(window);
 	drawPlayer(window);
+	drawProjectiles(window);
 }
 
 // Drawing UI
-void Play::drawScore(Window&)
+void Play::drawScore(Window& window)
 {
-
+	score.draw(window);
 }
 
-void Play::drawLives(Window&)
+void Play::drawLives(Window& window)
 {
 
 }
 
 void Play::drawUI(Window& window)
 {
-
+	drawScore(window);
+	drawLives(window);
 }
 
 // Main drawing function
@@ -111,13 +118,18 @@ void Play::pollEvents(sf::Event& event)
 
 void Play::updatePlayer()
 {
-	player.update(windowDimensions);
+	player.update(windowDimensions, asteroids);
 }
 
 void Play::updateAsteroids()
 {
 	for (int i = 0; i < asteroids.size(); i++)
 		asteroids[i].update(windowDimensions);
+}
+
+void Play::updateProjectiles()
+{
+	projectile.update(windowDimensions);
 }
 
 // Handles polling events and game logic
@@ -127,4 +139,5 @@ void Play::update(sf::Event& event)
 
 	updatePlayer();
 	updateAsteroids();
+	updateProjectiles();
 }

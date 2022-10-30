@@ -2,7 +2,6 @@
 
 Asteroid::Asteroid()
 {
-	initCollider();
 	initShape();
 	setRandomVelocity();
 	setRandomRotation();
@@ -15,23 +14,29 @@ Asteroid::~Asteroid()
 
 float Asteroid::getRadius()
 {
-	return maxRadiusFactor * static_cast<float>(size);
+	float maxRadius = 0.f;
+	for (int i = 0; i < vertices; i++)
+		if (maxRadius < getRadius(i))
+			maxRadius = getRadius(i);
+	
+	return maxRadius;
 }
 
-void Asteroid::hit(int& score)
+float Asteroid::getRadius(int i)
 {
-	score++;
+	return static_cast<float>(size) * vertexRadius[i];
+}
+
+void Asteroid::hit(Score& score)
+{
+	score.asteroidHit(size);
 	size--;
+
+	updateVertexArray();
+	initCollider();
 }
 
-// Initisalising the collider and shape
-void Asteroid::initCollider()
-{
-	collider = sf::CircleShape(getRadius(), 8);
-	collider.setPosition(sf::Vector2f(100.f, 200.f));
-	collider.setFillColor(sf::Color::Red);
-}
-
+// Initisalising the shape and collider
 void Asteroid::updateVertexArray()
 {
 	for (int i = 0; i < vertices - 1; i++)
@@ -41,7 +46,7 @@ void Asteroid::updateVertexArray()
 		float sinFactor = sinf(PI * angleDegrees / 180.f);
 		float cosFactor = cosf(PI * angleDegrees / 180.f);
 
-		shape[i].position = sf::Vector2f(pos.x + vertexRadius[i] * sinFactor, pos.y + vertexRadius[i] * cosFactor);
+		shape[i].position = sf::Vector2f(pos.x + getRadius(i) * sinFactor, pos.y + getRadius(i) * cosFactor);
 	}
 
 	shape[vertices - 1].position = shape[0].position;
@@ -74,6 +79,20 @@ void Asteroid::initShape()
 	shape = sf::VertexArray(sf::LinesStrip, vertices);
 
 	initVertexArray();
+	initCollider();
+}
+
+sf::CircleShape Asteroid::getCollider()
+{
+	return collider;
+}
+
+void Asteroid::initCollider()
+{
+	collider = sf::CircleShape(getRadius());
+	collider.setPosition(sf::Vector2f(0.f, 0.f));
+	collider.setOrigin(sf::Vector2f(getRadius(), getRadius()));
+	collider.setFillColor(sf::Color::Red);
 }
 
 bool Asteroid::isAlive()
@@ -178,6 +197,17 @@ void Asteroid::updatePos(sf::Vector2f windowDims)
 	setPos(sf::Vector2f(pos.x + speed.x, pos.y + speed.y));
 
 	loopPos(windowDims);
+}
+
+// Collsion checking
+bool Asteroid::collisionWithAsteroids(std::vector<Projectile>&)
+{
+	return false;
+}
+
+bool Asteroid::collisionChecks(std::vector<Projectile>&)
+{
+	return false;
 }
 
 void Asteroid::update(sf::Vector2f windowDims)

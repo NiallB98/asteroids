@@ -3,6 +3,8 @@
 #include "Window.h"
 #include "Player.h"
 #include "Asteroid.h"
+#include "Projectile.h"
+#include "Score.h"
 
 class Play
 {
@@ -13,6 +15,7 @@ private:
 	// Objects
 	Player player;
 	std::vector<Asteroid> asteroids;
+	Projectile projectile;
 
 	void initPlayer();
 
@@ -20,9 +23,8 @@ private:
 	void initAsteroids();
 	void initAsteroids(int);
 
-	// Initial values for score and lives
-	int score = 0;
-	int lives = 3;
+	// UI
+	Score score;
 
 	// Polling events
 	void pollPlayerEvents(sf::Event);
@@ -30,10 +32,12 @@ private:
 	// Updating
 	void updatePlayer();
 	void updateAsteroids();
+	void updateProjectiles();
 
 	// Drawing
 	void drawAsteroids(Window&);
 	void drawPlayer(Window&);
+	void drawProjectiles(Window&);
 	void drawObjects(Window&);
 
 	void drawScore(Window&);

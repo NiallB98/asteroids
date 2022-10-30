@@ -166,11 +166,13 @@ DEL "$(TargetDir)*.pdb" /Q</Command>
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="Lives.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Ufo.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asteroid.h" />
+    <ClInclude Include="Collision.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Lives.h" />
     <ClInclude Include="Menu.h" />
@@ -193,6 +195,12 @@ DEL "$(TargetDir)*.pdb" /Q</Command>
     <Image Include="icon\icon.png">
       <DeploymentContent>true</DeploymentContent>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="font\VectorBattle.ttf">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+    </Font>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

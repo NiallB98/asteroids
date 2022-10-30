@@ -6,12 +6,15 @@
 #define PI 3.14159265
 #include <math.h>
 #include <vector>
+#include <string>
 
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
+
+#include "Collision.h"
 
 class Window
 {
@@ -44,6 +47,7 @@ public:
 	void draw(sf::CircleShape);
 	void draw(sf::ConvexShape);
 	void draw(sf::VertexArray);
+	void draw(sf::Text);
 	void display();
 
 	void close();

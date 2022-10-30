@@ -70,6 +70,12 @@
     <Filter Include="Header Files\Game\objects\Menu">
       <UniqueIdentifier>{8329c26d-c9de-4775-8970-06a5bbc7e4f3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\objects\Play\common">
+      <UniqueIdentifier>{fe62bf81-f673-4535-b0bc-63f77dc73c7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\objects\Play\common">
+      <UniqueIdentifier>{652c3d2d-0d56-44c7-b827-0591fcfe0278}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -104,6 +110,9 @@
     </ClCompile>
     <ClCompile Include="Menu.cpp">
       <Filter>Source Files\Game\levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Source Files\Game\objects\Play\common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +155,9 @@
     <ClInclude Include="Menu.h">
       <Filter>Header Files\Game\levels</Filter>
     </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Header Files\Game\objects\Play\common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc">
@@ -162,5 +174,10 @@
     <Image Include="icon\icon.png">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="font\VectorBattle.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
   </ItemGroup>
 </Project>

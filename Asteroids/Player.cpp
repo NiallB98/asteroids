@@ -11,14 +11,7 @@ Player::~Player()
 
 }
 
-// Initialising the collider and shape
-void Player::initCollider()
-{
-	collider = sf::CircleShape(25, 3);
-	collider.setPosition(sf::Vector2f(300.f, 300.f));
-	collider.setFillColor(sf::Color::Green);
-}
-
+// Initialising the shape and collider
 void Player::updateVertexArray()
 {
 	float topLength = 15.f;
@@ -64,6 +57,14 @@ void Player::initShape()
 	shape = sf::VertexArray(sf::LinesStrip, vertices);
 
 	initVertexArray();
+}
+
+void Player::initCollider()
+{
+	collider = sf::CircleShape(15.f);
+	collider.setPosition(pos);
+	collider.setOrigin(sf::Vector2f(15.f, 15.f));
+	collider.setFillColor(sf::Color::Green);
 }
 
 // Drawing
@@ -178,8 +179,29 @@ void Player::pollEvents(sf::Event& event)
 		accelerate();
 }
 
+// Collsion checking
+bool Player::collisionWithAsteroids(std::vector<Asteroid>& asteroids)
+{
+	for (int i = 0; i < asteroids.size(); i++)
+		if (circlesColliding(collider, asteroids[i].getCollider()))
+			return true;
+	return false;
+}
+
+bool Player::collisionChecks(std::vector<Asteroid>& asteroids)
+{
+	bool collided = (collisionWithAsteroids(asteroids));
+	if (collided)
+		collider.setFillColor(sf::Color::White);
+	else
+		collider.setFillColor(sf::Color::Green);
+
+	return collided;
+}
+
 // Update
-void Player::update(sf::Vector2f windowDims)
+void Player::update(sf::Vector2f windowDims, std::vector<Asteroid>& asteroids)
 {
 	updatePos(windowDims);
+	collisionChecks(asteroids);
 }
