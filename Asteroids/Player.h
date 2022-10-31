@@ -35,7 +35,6 @@ private:
 	float acceleration = 0.1f;
 
 	void updatePos(sf::Vector2f);
-	void loopPos(sf::Vector2f);
 
 	// Collsion checking
 	bool collisionWithAsteroids(std::vector<Asteroid>&);

@@ -2,4 +2,9 @@
 
 #include "Window.h"
 
-bool circlesColliding(sf::CircleShape, sf::CircleShape);
+namespace clsn
+{
+	bool circlesColliding(sf::CircleShape, sf::CircleShape);
+	bool lineAndCircleColliding(sf::VertexArray, sf::CircleShape);
+	bool lineAndCircleColliding(sf::CircleShape, sf::VertexArray);
+};

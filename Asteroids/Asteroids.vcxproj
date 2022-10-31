@@ -160,22 +160,24 @@ DEL "$(TargetDir)*.pdb" /Q</Command>
     <ClCompile Include="Asteroid.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="movement.cpp" />
     <ClCompile Include="Play.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="Lives.cpp" />
     <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="collision.cpp" />
     <ClCompile Include="Ufo.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asteroid.h" />
-    <ClInclude Include="Collision.h" />
+    <ClInclude Include="collision.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Lives.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="movement.h" />
     <ClInclude Include="Play.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Projectile.h" />

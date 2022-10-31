@@ -23,11 +23,9 @@ private:
 	void move();
 	void setPos(sf::Vector2f);
 	void updatePos(sf::Vector2f);
-	void loopPos(sf::Vector2f);
 
 	sf::Vector2f speed = sf::Vector2f(0.f, 0.f);
 	float maxSpeed = 8.f;
-	void setRandomSpeed();
 
 	// Drawing
 	void drawShape(Window&);

@@ -3,7 +3,7 @@
 Projectile::Projectile()
 {
 	initShape();
-	setRandomSpeed();
+	mvmt::setRandomVelocity(speed, maxSpeed, rotationDegrees);
 }
 
 Projectile::~Projectile()
@@ -47,16 +47,6 @@ void Projectile::updateVertexArray()
 }
 
 // Movement
-void Projectile::setRandomSpeed()
-{
-	rotationDegrees = static_cast<float>(rand() % 360);
-
-	float sinFactor = sinf(PI * rotationDegrees / 180.f);
-	float cosFactor = cosf(PI * rotationDegrees / 180.f);
-
-	speed = sf::Vector2f(maxSpeed * sinFactor, maxSpeed * cosFactor);
-}
-
 void Projectile::setPos(sf::Vector2f newPos)
 {
 	pos = newPos;
@@ -72,39 +62,8 @@ void Projectile::move()
 void Projectile::updatePos(sf::Vector2f windowDims)
 {
 	move();
-	loopPos(windowDims);
-}
-
-void Projectile::loopPos(sf::Vector2f windowDims)
-{
-	bool changed = false;
-
-	// Horizontal position
-	if (pos.x < 0.f)
-	{
-		pos.x += windowDims.x;
-		changed = true;
-	}
-	else if (pos.x > windowDims.x)
-	{
-		pos.x -= windowDims.x;
-		changed = true;
-	}
-
-	// Vertical position
-	if (pos.y < 0.f)
-	{
-		pos.y += windowDims.y;
-		changed = true;
-	}
-	else if (pos.y > windowDims.y)
-	{
-		pos.y -= windowDims.y;
-		changed = true;
-	}
-
-	if (changed)
-		setPos(sf::Vector2f(pos.x, pos.y));
+	if (mvmt::loopPos(windowDims, pos))
+		setPos(pos);
 }
 
 void Projectile::update(sf::Vector2f windowDims)

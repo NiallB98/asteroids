@@ -111,7 +111,10 @@
     <ClCompile Include="Menu.cpp">
       <Filter>Source Files\Game\levels</Filter>
     </ClCompile>
-    <ClCompile Include="Collision.cpp">
+    <ClCompile Include="collision.cpp">
+      <Filter>Source Files\Game\objects\Play\common</Filter>
+    </ClCompile>
+    <ClCompile Include="movement.cpp">
       <Filter>Source Files\Game\objects\Play\common</Filter>
     </ClCompile>
   </ItemGroup>
@@ -155,7 +158,10 @@
     <ClInclude Include="Menu.h">
       <Filter>Header Files\Game\levels</Filter>
     </ClInclude>
-    <ClInclude Include="Collision.h">
+    <ClInclude Include="collision.h">
+      <Filter>Header Files\Game\objects\Play\common</Filter>
+    </ClInclude>
+    <ClInclude Include="movement.h">
       <Filter>Header Files\Game\objects\Play\common</Filter>
     </ClInclude>
   </ItemGroup>

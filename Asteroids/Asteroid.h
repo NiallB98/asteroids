@@ -37,19 +37,14 @@ private:
 	sf::Vector2f pos = sf::Vector2f(0.f, 0.f);
 	
 	float rotationSpeedDegrees = 0.f;
-	float minRotationSpeedDegrees = 0.5f;
-	float maxRotationSpeedDegrees = 3.f;
+	sf::Vector2f minMaxRotationSpeedDegrees = sf::Vector2f(0.5f, 3.f);
 	float rotationDegrees = 0.f;
-	void setRandomRotation();
 	void rotate();
 	
 	sf::Vector2f speed = sf::Vector2f(0.f, 0.f);
-	float minSpeed = 1.f;
-	float maxSpeed = 3.f;
-	void setRandomVelocity();
+	sf::Vector2f minMaxSpeed = sf::Vector2f(1.f, 3.f);
 
 	void updatePos(sf::Vector2f);
-	void loopPos(sf::Vector2f);
 
 	// Collsion checking
 	bool collisionWithAsteroids(std::vector<Projectile>&);
