@@ -160,6 +160,8 @@ DEL "$(TargetDir)*.pdb" /Q</Command>
     <ClCompile Include="Asteroid.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MenuControlHint.cpp" />
+    <ClCompile Include="MenuControls.cpp" />
     <ClCompile Include="movement.cpp" />
     <ClCompile Include="Play.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -168,6 +170,8 @@ DEL "$(TargetDir)*.pdb" /Q</Command>
     <ClCompile Include="Lives.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="collision.cpp" />
+    <ClCompile Include="text.cpp" />
+    <ClCompile Include="Title.cpp" />
     <ClCompile Include="Ufo.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
@@ -177,6 +181,8 @@ DEL "$(TargetDir)*.pdb" /Q</Command>
     <ClInclude Include="Game.h" />
     <ClInclude Include="Lives.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="MenuControlHint.h" />
+    <ClInclude Include="MenuControls.h" />
     <ClInclude Include="movement.h" />
     <ClInclude Include="Play.h" />
     <ClInclude Include="Player.h" />
@@ -185,6 +191,8 @@ DEL "$(TargetDir)*.pdb" /Q</Command>
     <ClInclude Include="resource1.h" />
     <ClInclude Include="resource2.h" />
     <ClInclude Include="Score.h" />
+    <ClInclude Include="text.h" />
+    <ClInclude Include="Title.h" />
     <ClInclude Include="Ufo.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>

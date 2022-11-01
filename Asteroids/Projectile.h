@@ -27,14 +27,12 @@ private:
 	sf::Vector2f speed = sf::Vector2f(0.f, 0.f);
 	float maxSpeed = 8.f;
 
-	// Drawing
-	void drawShape(Window&);
-
 public:
 	Projectile();
 	~Projectile();
 
 	void update(sf::Vector2f);
+	void postUpdate();
 
 	void draw(Window&);
 };

@@ -6,8 +6,12 @@
 class Player
 {
 private:
+	bool alive = true;
+
+	void die();
+
 	// Collider
-	bool doDrawCollider = true;
+	bool doDrawCollider = false;
 	sf::CircleShape collider;
 	void initCollider();
 
@@ -44,6 +48,8 @@ public:
 	Player();
 	~Player();
 
+	bool isAlive();
+
 	// Movement
 	void setPos(sf::Vector2f);
 	void rotate(bool);
@@ -52,6 +58,7 @@ public:
 	// Updating and events
 	void pollEvents(sf::Event&);
 	void update(sf::Vector2f, std::vector<Asteroid>&);
+	void postUpdate();
 
 	void draw(Window&);
 };

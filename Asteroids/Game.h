@@ -13,6 +13,7 @@
 
 #include "Window.h"
 #include "Play.h"
+#include "Menu.h"
 
 #define MENU 0
 #define PLAY 1
@@ -24,9 +25,14 @@ private:
 	sf::Event event;
 
 	// Levels
-	int currentLevel = 1;
-	Play levelPlay;
+	int currentLevel = 0;
+	Play* levelPlay;
+	Menu* levelMenu;
 	void initLevels();
+	void initLevel(int);
+
+	void levelChanging();
+	void changeLevel(int);
 
 	void pollGlobalEvents();
 
@@ -37,6 +43,7 @@ public:
 	sf::Clock clock;																				// To keep track of delta time use "sf::Time dt = clock.getElapsedTime();" (Use dt.asMilliseconds())
 
 	void update();
+	void postUpdate();
 	void render();
 
 	bool isRunning();

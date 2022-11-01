@@ -70,10 +70,10 @@
     <Filter Include="Header Files\Game\objects\Menu">
       <UniqueIdentifier>{8329c26d-c9de-4775-8970-06a5bbc7e4f3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game\objects\Play\common">
+    <Filter Include="Source Files\common">
       <UniqueIdentifier>{fe62bf81-f673-4535-b0bc-63f77dc73c7b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Game\objects\Play\common">
+    <Filter Include="Header Files\common">
       <UniqueIdentifier>{652c3d2d-0d56-44c7-b827-0591fcfe0278}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -112,10 +112,22 @@
       <Filter>Source Files\Game\levels</Filter>
     </ClCompile>
     <ClCompile Include="collision.cpp">
-      <Filter>Source Files\Game\objects\Play\common</Filter>
+      <Filter>Source Files\common</Filter>
     </ClCompile>
     <ClCompile Include="movement.cpp">
-      <Filter>Source Files\Game\objects\Play\common</Filter>
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Title.cpp">
+      <Filter>Source Files\Game\ui\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="text.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuControls.cpp">
+      <Filter>Source Files\Game\objects\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuControlHint.cpp">
+      <Filter>Source Files\Game\ui\Menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -159,10 +171,22 @@
       <Filter>Header Files\Game\levels</Filter>
     </ClInclude>
     <ClInclude Include="collision.h">
-      <Filter>Header Files\Game\objects\Play\common</Filter>
+      <Filter>Header Files\common</Filter>
     </ClInclude>
     <ClInclude Include="movement.h">
-      <Filter>Header Files\Game\objects\Play\common</Filter>
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Title.h">
+      <Filter>Header Files\Game\ui\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="text.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuControls.h">
+      <Filter>Header Files\Game\objects\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuControlHint.h">
+      <Filter>Header Files\Game\ui\Menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

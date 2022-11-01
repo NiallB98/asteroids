@@ -49,7 +49,7 @@ void Asteroid::updateVertexArray()
 		shape[i].position = sf::Vector2f(pos.x + getRadius(i) * sinFactor, pos.y + getRadius(i) * cosFactor);
 	}
 
-	shape[vertices - 1].position = shape[0].position;
+	shape[vertices-1].position = shape[0].position;
 }
 
 void Asteroid::initVertexArray()
@@ -158,4 +158,9 @@ void Asteroid::update(sf::Vector2f windowDims)
 {
 	updatePos(windowDims);
 	rotate();
+}
+
+void Asteroid::postUpdate()
+{
+
 }

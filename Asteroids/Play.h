@@ -5,6 +5,7 @@
 #include "Asteroid.h"
 #include "Projectile.h"
 #include "Score.h"
+#include "Lives.h"
 
 class Play
 {
@@ -15,16 +16,23 @@ private:
 	// Objects
 	Player player;
 	std::vector<Asteroid> asteroids;
-	Projectile projectile;
+	std::vector<Projectile> playerProjectiles = std::vector<Projectile>(0);
+	std::vector<Projectile> enemyProjectiles = std::vector<Projectile>(0);
+
+	int maxAsteroids = 42 * 3;
+	int maxPlayerProjectiles = 128;
+	int maxEnemyProjectiles = 128;
 
 	void initPlayer();
 
-	int numAsteroids = 5;
 	void initAsteroids();
 	void initAsteroids(int);
 
+	void initProjectiles();
+
 	// UI
 	Score score;
+	Lives lives;
 
 	// Polling events
 	void pollPlayerEvents(sf::Event);
@@ -33,6 +41,13 @@ private:
 	void updatePlayer();
 	void updateAsteroids();
 	void updateProjectiles();
+
+	void showDeathScreen();
+
+	// Post updating
+	void postUpdatePlayer();
+	void postUpdateAsteroids();
+	void postUpdateProjectiles();
 
 	// Drawing
 	void drawAsteroids(Window&);
@@ -54,6 +69,9 @@ public:
 	// Events and update
 	void pollEvents(sf::Event&);
 	void update(sf::Event&);
+
+	// Post updating
+	void postUpdate();
 
 	// Drawing
 	void draw(Window&);

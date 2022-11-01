@@ -16,6 +16,7 @@
 
 #include "collision.h"
 #include "movement.h"
+#include "text.h"
 
 class Window
 {

@@ -71,6 +71,11 @@ void Projectile::update(sf::Vector2f windowDims)
 	updatePos(windowDims);
 }
 
+void Projectile::postUpdate()
+{
+
+}
+
 void Projectile::draw(Window& window)
 {
 	window.draw(shape);

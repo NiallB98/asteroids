@@ -11,6 +11,16 @@ Player::~Player()
 
 }
 
+bool Player::isAlive()
+{
+	return alive;
+}
+
+void Player::die()
+{
+	alive = false;
+}
+
 // Initialising the shape and collider
 void Player::updateVertexArray()
 {
@@ -81,8 +91,11 @@ void Player::drawShape(Window& window)
 
 void Player::draw(Window& window)
 {
-	drawCollider(window);
-	drawShape(window);
+	if (isAlive())
+	{
+		drawCollider(window);
+		drawShape(window);
+	}
 }
 
 // Movement
@@ -148,7 +161,7 @@ void Player::pollEvents(sf::Event& event)
 		accelerate();
 }
 
-// Collsion checking
+// Collision checking
 bool Player::collisionWithAsteroids(std::vector<Asteroid>& asteroids)
 {
 	for (int i = 0; i < asteroids.size(); i++)
@@ -160,8 +173,13 @@ bool Player::collisionWithAsteroids(std::vector<Asteroid>& asteroids)
 bool Player::collisionChecks(std::vector<Asteroid>& asteroids)
 {
 	bool collided = (collisionWithAsteroids(asteroids));
-	if (collided && doDrawCollider)
-		collider.setFillColor(sf::Color::White);
+
+	if (collided)
+	{
+		if (doDrawCollider)
+			collider.setFillColor(sf::Color::White);
+		die();
+	}
 	else if (doDrawCollider)
 		collider.setFillColor(sf::Color::Green);
 
@@ -171,6 +189,14 @@ bool Player::collisionChecks(std::vector<Asteroid>& asteroids)
 // Update
 void Player::update(sf::Vector2f windowDims, std::vector<Asteroid>& asteroids)
 {
-	updatePos(windowDims);
-	collisionChecks(asteroids);
+	if (isAlive())
+	{
+		updatePos(windowDims);
+		collisionChecks(asteroids);
+	}
+}
+
+void Player::postUpdate()
+{
+
 }

@@ -5,6 +5,7 @@ Play::Play()
 	updateWindowDimensions(sf::Vector2f(720.f, 720.f));
 	initPlayer();
 	initAsteroids();
+	initProjectiles();
 }
 
 Play::Play(sf::Vector2f windowDims, int num)
@@ -12,6 +13,7 @@ Play::Play(sf::Vector2f windowDims, int num)
 	updateWindowDimensions(windowDims);
 	initPlayer();
 	initAsteroids(num);
+	initProjectiles();
 }
 
 Play::~Play()
@@ -32,7 +34,7 @@ void Play::initPlayer()
 // This method sets the random positions and velocities of each asteroid
 void Play::initAsteroids(int num)
 {
-	numAsteroids = num;
+	asteroids.reserve(maxAsteroids);
 	asteroids = std::vector<Asteroid>(num);
 
 	// Setting asteroids to start at random positions
@@ -52,7 +54,12 @@ void Play::initAsteroids(int num)
 
 void Play::initAsteroids()
 {
-	initAsteroids(numAsteroids);
+	initAsteroids(5);
+}
+
+void Play::initProjectiles()
+{
+	playerProjectiles.reserve(maxPlayerProjectiles);
 }
 
 // Drawing objects
@@ -72,7 +79,13 @@ void Play::drawAsteroids(Window& window)
 
 void Play::drawProjectiles(Window& window)
 {
-	projectile.draw(window);
+	// Player projectiles
+	for (int i = 0; i < playerProjectiles.size(); i++)
+		playerProjectiles[i].draw(window);
+
+	// Enemy projectiles
+	for (int i = 0; i < enemyProjectiles.size(); i++)
+		enemyProjectiles[i].draw(window);
 }
 
 void Play::drawObjects(Window& window)
@@ -90,7 +103,7 @@ void Play::drawScore(Window& window)
 
 void Play::drawLives(Window& window)
 {
-
+	lives.draw(window);
 }
 
 void Play::drawUI(Window& window)
@@ -129,7 +142,13 @@ void Play::updateAsteroids()
 
 void Play::updateProjectiles()
 {
-	projectile.update(windowDimensions);
+	// Player projectiles
+	for (int i = 0; i < playerProjectiles.size(); i++)
+		playerProjectiles[i].update(windowDimensions);
+
+	// Enemy projectiles
+	for (int i = 0; i < enemyProjectiles.size(); i++)
+		enemyProjectiles[i].update(windowDimensions);
 }
 
 // Handles polling events and game logic
@@ -140,4 +159,52 @@ void Play::update(sf::Event& event)
 	updatePlayer();
 	updateAsteroids();
 	updateProjectiles();
+}
+
+// Post update stage
+void Play::postUpdatePlayer()
+{
+	player.postUpdate();
+}
+
+void Play::postUpdateAsteroids()
+{
+	// Player projectiles
+	for (int i = 0; i < asteroids.size(); i++)
+		asteroids[i].postUpdate();
+}
+
+void Play::postUpdateProjectiles()
+{
+	// Player projectiles
+	for (int i = 0; i < playerProjectiles.size(); i++)
+		playerProjectiles[i].postUpdate();
+
+	// Enemy projectiles
+	for (int i = 0; i < enemyProjectiles.size(); i++)
+		enemyProjectiles[i].postUpdate();
+}
+
+void Play::showDeathScreen()
+{
+	lives.initDeathScreenSettings();
+	score.initDeathScreenSettings(windowDimensions);
+}
+
+void Play::postUpdate()
+{
+	postUpdatePlayer();
+	postUpdateAsteroids();
+	postUpdateProjectiles();
+
+	if (not player.isAlive() && lives.getLives() > 0)
+	{
+		player = Player();
+		initPlayer();
+		lives.loseOne();
+	}
+	else if (not player.isAlive())
+	{
+		showDeathScreen();
+	}
 }

@@ -2,17 +2,34 @@
 
 Game::Game()
 {
-	
+	initLevel(currentLevel);
 }
 
 Game::~Game()
 {
-	
+	delete levelMenu;
+	delete levelPlay;
 }
 
 void Game::initLevels()
 {
-	levelPlay = Play(window.getDimensions(), 3);
+	initLevel(MENU);
+	initLevel(PLAY);
+}
+
+void Game::initLevel(int level)
+{
+	switch (level)
+	{
+	case MENU:
+		levelMenu = new Menu(window.getDimensions());
+		break;
+	case PLAY:
+		levelPlay = new Play(window.getDimensions(), 3);
+		break;
+	default:
+		break;
+	}
 }
 
 // Reacts to input events that have occurred
@@ -43,10 +60,60 @@ void Game::update()
 	switch (currentLevel)
 	{
 	case MENU:
-
+		levelMenu->update(event);
 		break;
 	case PLAY:
-		levelPlay.update(event);
+		levelPlay->update(event);
+		break;
+	default:
+		break;
+	}
+}
+
+void Game::changeLevel(int level)
+{
+	switch (currentLevel)
+	{
+	case MENU:
+		delete levelMenu;
+		levelMenu = NULL;
+		break;
+	case PLAY:
+		delete levelPlay;
+		levelPlay = NULL;
+		break;
+	}
+	
+	currentLevel = level;
+	initLevel(currentLevel);
+}
+
+void Game::levelChanging()
+{
+	switch (currentLevel)
+	{
+	case MENU:
+		if (levelMenu->playNow())
+			changeLevel(PLAY);
+		break;
+	case PLAY:
+		break;
+	default:
+		break;
+	}
+}
+
+void Game::postUpdate()
+{
+	switch (currentLevel)
+	{
+	case MENU:
+		levelMenu->postUpdate();
+		levelChanging();
+		break;
+	case PLAY:
+		levelPlay->postUpdate();
+		levelChanging();
 		break;
 	default:
 		break;
@@ -61,10 +128,10 @@ void Game::render()
 	switch (currentLevel)
 	{
 	case MENU:
-
+		levelMenu->draw(window);
 		break;
 	case PLAY:
-		levelPlay.draw(window);
+		levelPlay->draw(window);
 		break;
 	default:
 		break;

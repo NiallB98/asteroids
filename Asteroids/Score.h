@@ -7,6 +7,8 @@ class Score
 private:
 	int score = 0;
 
+	bool scoreLocked = false;
+
 	std::vector<int> asteroidSizeScores = std::vector<int>{25, 100, 250};
 	int ufoScore = 150;
 	int cometScore = 1000;
@@ -21,6 +23,12 @@ private:
 	void initText();
 	void updateText();
 
+	bool textLocked = false;
+
+	// Death screen settings
+	int deathScreenCharacterSize = 100;
+	sf::Vector2f deathScreenPosRelToCentre = sf::Vector2f(0.f, 0.f);
+
 public:
 	Score();
 	~Score();
@@ -30,6 +38,8 @@ public:
 	void asteroidHit(int);
 	void ufoHit();
 	void cometHit();
+
+	void initDeathScreenSettings(sf::Vector2f);
 
 	// Drawing
 	void draw(Window&);

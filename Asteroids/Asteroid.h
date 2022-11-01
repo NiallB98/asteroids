@@ -7,7 +7,7 @@
 class Asteroid
 {
 private:
-	int size = 2;
+	int size = 3;
 	float maxRadiusFactor = 18;
 	float minRadiusFactor = 9;
 	float getRadius();
@@ -25,7 +25,7 @@ private:
 	std::vector<float> vertexRadius = std::vector<float>(vertices);
 
 	// Collider
-	bool doDrawCollider = true;
+	bool doDrawCollider = false;
 	sf::CircleShape collider;
 	void initCollider();
 
@@ -62,6 +62,7 @@ public:
 
 	// Update
 	void update(sf::Vector2f);
+	void postUpdate();
 
 	void draw(Window&);
 };
