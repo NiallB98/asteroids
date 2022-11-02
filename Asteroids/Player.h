@@ -7,12 +7,19 @@ class Player
 {
 private:
 	bool alive = true;
+	bool invincible = true;
+	float invincibleDurationSecs = 3;
+	sf::Clock invincibleClock;
 
+	void initClocks();
+	void removeInvincible();
 	void die();
 
 	// Collider
-	bool doDrawCollider = false;
+	bool doDrawCollider = true;
 	sf::CircleShape collider;
+	sf::Color colliderColourNotHit = sf::Color(116, 177, 210, 100);
+	sf::Color colliderColourHit = sf::Color(163, 203, 225, 150);
 	void initCollider();
 
 	// Shape
@@ -49,6 +56,7 @@ public:
 	~Player();
 
 	bool isAlive();
+	bool isInvincible();
 
 	// Movement
 	void setPos(sf::Vector2f);

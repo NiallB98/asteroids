@@ -4,16 +4,33 @@ Player::Player()
 {
 	initCollider();
 	initShape();
+	initClocks();
 }
 
 Player::~Player()
 {
+	
+}
 
+void Player::initClocks()
+{
+	invincibleClock.restart();
 }
 
 bool Player::isAlive()
 {
 	return alive;
+}
+
+bool Player::isInvincible()
+{
+	return invincible;
+}
+
+void Player::removeInvincible()
+{
+	invincible = false;
+	doDrawCollider = false;
 }
 
 void Player::die()
@@ -74,7 +91,7 @@ void Player::initCollider()
 	collider = sf::CircleShape(15.f);
 	collider.setPosition(pos);
 	collider.setOrigin(sf::Vector2f(15.f, 15.f));
-	collider.setFillColor(sf::Color::Green);
+	collider.setFillColor(colliderColourNotHit);
 }
 
 // Drawing
@@ -177,11 +194,12 @@ bool Player::collisionChecks(std::vector<Asteroid>& asteroids)
 	if (collided)
 	{
 		if (doDrawCollider)
-			collider.setFillColor(sf::Color::White);
-		die();
+			collider.setFillColor(colliderColourHit);
+		if (not isInvincible() and isAlive())
+			die();
 	}
 	else if (doDrawCollider)
-		collider.setFillColor(sf::Color::Green);
+		collider.setFillColor(colliderColourNotHit);
 
 	return collided;
 }
@@ -198,5 +216,6 @@ void Player::update(sf::Vector2f windowDims, std::vector<Asteroid>& asteroids)
 
 void Player::postUpdate()
 {
-
+	if (isInvincible() && invincibleDurationSecs < invincibleClock.getElapsedTime().asSeconds())
+		removeInvincible();
 }
