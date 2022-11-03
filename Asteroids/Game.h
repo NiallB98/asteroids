@@ -40,7 +40,8 @@ public:
 	Game();
 	~Game();
 
-	sf::Clock clock;																				// To keep track of delta time use "sf::Time dt = clock.getElapsedTime();" (Use dt.asMilliseconds())
+	sf::Clock deltaTimeClock;																				// To keep track of delta time use "sf::Time dt = clock.getElapsedTime();" (Use dt.asMilliseconds())
+	sf::Clock clock;
 
 	void update();
 	void postUpdate();

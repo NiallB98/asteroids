@@ -1,5 +1,8 @@
 #include "Asteroid.h"
 
+#include "Projectile.h"
+#include "Score.h"
+
 Asteroid::Asteroid()
 {
 	initShape();
@@ -33,7 +36,7 @@ void Asteroid::hit(Score& score)
 	size--;
 
 	updateVertexArray();
-	initCollider();
+	resetCollider();
 }
 
 // Initisalising the shape and collider
@@ -90,8 +93,16 @@ sf::CircleShape Asteroid::getCollider()
 void Asteroid::initCollider()
 {
 	collider = sf::CircleShape(getRadius());
-	collider.setPosition(sf::Vector2f(0.f, 0.f));
 	collider.setOrigin(sf::Vector2f(getRadius(), getRadius()));
+	collider.setPosition(sf::Vector2f(pos));
+	collider.setFillColor(sf::Color::Red);
+}
+
+void Asteroid::resetCollider()
+{
+	collider.setRadius(getRadius());
+	collider.setOrigin(sf::Vector2f(getRadius(), getRadius()));
+	collider.setPosition(sf::Vector2f(pos));
 	collider.setFillColor(sf::Color::Red);
 }
 
@@ -144,23 +155,50 @@ void Asteroid::updatePos(sf::Vector2f windowDims)
 }
 
 // Collsion checking
-bool Asteroid::collisionWithAsteroids(std::vector<Projectile>&)
+bool Asteroid::collisionWithProjectiles(std::vector<Projectile>& playerProjectiles)
 {
+	for (int i = 0; i < playerProjectiles.size(); i++)
+	{
+		if (clsn::lineAndCircleColliding(collider, playerProjectiles[i].getCollider()))
+		{
+			hasBeenHit = true;
+			return true;
+		}
+	}
 	return false;
 }
 
-bool Asteroid::collisionChecks(std::vector<Projectile>&)
+bool Asteroid::collisionChecks(std::vector<Projectile>& playerProjectiles)
 {
-	return false;
+	return collisionWithProjectiles(playerProjectiles);
 }
 
-void Asteroid::update(sf::Vector2f windowDims)
+void Asteroid::update(sf::Vector2f windowDims, std::vector<Projectile>& playerProjectiles)
 {
 	updatePos(windowDims);
 	rotate();
+	if (isAlive())
+		collisionChecks(playerProjectiles);
 }
 
-void Asteroid::postUpdate()
+void Asteroid::reduce(Score& score)
 {
+	hit(score);
+}
 
+void Asteroid::die(Score& score)
+{
+	hit(score);
+}
+
+void Asteroid::postUpdate(Score& score)
+{
+	if (hasBeenHit)
+	{
+		if (size > 1)
+			reduce(score);
+		else
+			die(score);
+		hasBeenHit = false;
+	}
 }

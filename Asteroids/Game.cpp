@@ -30,6 +30,8 @@ void Game::initLevel(int level)
 	default:
 		break;
 	}
+
+	clock.restart();
 }
 
 // Reacts to input events that have occurred
@@ -63,7 +65,7 @@ void Game::update()
 		levelMenu->update(event);
 		break;
 	case PLAY:
-		levelPlay->update(event);
+		levelPlay->update(event, clock);
 		break;
 	default:
 		break;
@@ -112,7 +114,7 @@ void Game::postUpdate()
 		levelChanging();
 		break;
 	case PLAY:
-		levelPlay->postUpdate();
+		levelPlay->postUpdate(clock);
 		levelChanging();
 		break;
 	default:
@@ -138,7 +140,7 @@ void Game::render()
 	}
 
 	window.display();
-	Game::clock.restart();
+	Game::deltaTimeClock.restart();
 }
 
 bool Game::isRunning()

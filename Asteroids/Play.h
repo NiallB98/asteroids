@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Window.h"
+
 #include "Player.h"
 #include "Asteroid.h"
 #include "Projectile.h"
@@ -35,7 +36,7 @@ private:
 	Lives lives;
 
 	// Polling events
-	void pollPlayerEvents(sf::Event);
+	void pollPlayerEvents(sf::Event, sf::Clock&);
 
 	// Updating
 	void updatePlayer();
@@ -45,7 +46,10 @@ private:
 	void showDeathScreen();
 
 	// Post updating
-	void postUpdatePlayer();
+	void checkExpiredObjects(sf::Clock&);
+	void checkDeadObjects();
+
+	void postUpdatePlayer(sf::Clock&);
 	void postUpdateAsteroids();
 	void postUpdateProjectiles();
 
@@ -67,11 +71,11 @@ public:
 	void updateWindowDimensions(sf::Vector2f);
 
 	// Events and update
-	void pollEvents(sf::Event&);
-	void update(sf::Event&);
+	void pollEvents(sf::Event&, sf::Clock&);
+	void update(sf::Event&, sf::Clock& clock);
 
 	// Post updating
-	void postUpdate();
+	void postUpdate(sf::Clock&);
 
 	// Drawing
 	void draw(Window&);

@@ -1,20 +1,17 @@
 #include "Player.h"
 
+#include "Asteroid.h"
+#include "Projectile.h"
+
 Player::Player()
 {
 	initCollider();
 	initShape();
-	initClocks();
 }
 
 Player::~Player()
 {
 	
-}
-
-void Player::initClocks()
-{
-	invincibleClock.restart();
 }
 
 bool Player::isAlive()
@@ -61,6 +58,8 @@ void Player::updateVertexArray()
 	shape[1].position = sf::Vector2f(pos.x + rSideRelX, pos.y + rSideRelY);
 	shape[2].position = sf::Vector2f(pos.x + lSideRelX, pos.y + lSideRelY);
 	shape[3].position = shape[0].position;
+
+	cannonPos = shape[0].position;
 }
 
 void Player::initVertexArray()
@@ -156,7 +155,18 @@ void Player::updatePos(sf::Vector2f windowDims)
 		setPos(pos);
 }
 
-void Player::pollEvents(sf::Event& event)
+void Player::fireProjectile(std::vector<Projectile>& playerProjectiles, sf::Clock& clock)
+{
+	if (lastFiredSeconds < clock.getElapsedTime().asSeconds() - fireCooldownSeconds)
+	{
+		std::vector<Projectile>::iterator p = playerProjectiles.end();
+		playerProjectiles.insert(p, Projectile(cannonPos, rotationDegrees, clock));
+
+		lastFiredSeconds = clock.getElapsedTime().asSeconds();
+	}
+}
+
+void Player::pollEvents(sf::Event& event, sf::Clock& clock, std::vector<Projectile>& playerProjectiles)
 {
 	// Rotation
 	int rotationDir = 0;
@@ -176,6 +186,9 @@ void Player::pollEvents(sf::Event& event)
 	// Forward movement
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
 		accelerate();
+	// Firing projectiles
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		fireProjectile(playerProjectiles, clock);
 }
 
 // Collision checking
@@ -214,8 +227,8 @@ void Player::update(sf::Vector2f windowDims, std::vector<Asteroid>& asteroids)
 	}
 }
 
-void Player::postUpdate()
+void Player::postUpdate(sf::Clock& clock)
 {
-	if (isInvincible() && invincibleDurationSecs < invincibleClock.getElapsedTime().asSeconds())
+	if (isInvincible() && invincibleDurationSecs < clock.getElapsedTime().asSeconds())
 		removeInvincible();
 }

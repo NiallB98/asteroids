@@ -17,14 +17,16 @@ namespace clsn
 			(line[0].position.x - circle.getPosition().x) * (line[0].position.x - circle.getPosition().x) +
 			(line[0].position.y - circle.getPosition().y) * (line[0].position.y - circle.getPosition().y));
 
-		if (distanceFromCircleCentre < circle.getRadius())
+		float radius = std::floor(circle.getRadius());
+
+		if (distanceFromCircleCentre < radius)
 			return true;
 
 		distanceFromCircleCentre = std::sqrtf(
 			(line[1].position.x - circle.getPosition().x) * (line[1].position.x - circle.getPosition().x) +
 			(line[1].position.y - circle.getPosition().y) * (line[1].position.y - circle.getPosition().y));
 
-		if (distanceFromCircleCentre < circle.getRadius())
+		if (distanceFromCircleCentre < radius)
 			return true;
 		else
 			return false;

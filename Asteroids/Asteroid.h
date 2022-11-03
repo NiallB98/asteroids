@@ -1,8 +1,9 @@
 #pragma once
 
 #include "Window.h"
-#include "Projectile.h"
-#include "Score.h"
+
+class Projectile;
+class Score;
 
 class Asteroid
 {
@@ -25,9 +26,10 @@ private:
 	std::vector<float> vertexRadius = std::vector<float>(vertices);
 
 	// Collider
-	bool doDrawCollider = false;
+	bool doDrawCollider = true;
 	sf::CircleShape collider;
 	void initCollider();
+	void resetCollider();
 
 	// Drawing
 	void drawCollider(Window&);
@@ -47,8 +49,12 @@ private:
 	void updatePos(sf::Vector2f);
 
 	// Collsion checking
-	bool collisionWithAsteroids(std::vector<Projectile>&);
+	bool hasBeenHit = false;
+	bool collisionWithProjectiles(std::vector<Projectile>&);
 	bool collisionChecks(std::vector<Projectile>&);
+
+	void die(Score&);
+	void reduce(Score&);
 
 public:
 	Asteroid();
@@ -61,8 +67,8 @@ public:
 	void setPos(sf::Vector2f);
 
 	// Update
-	void update(sf::Vector2f);
-	void postUpdate();
+	void update(sf::Vector2f, std::vector<Projectile>&);
+	void postUpdate(Score&);
 
 	void draw(Window&);
 };

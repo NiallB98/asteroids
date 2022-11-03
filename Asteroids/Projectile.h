@@ -1,11 +1,14 @@
-#pragma once
-
 #include "Window.h"
+
+class Asteroid;
 
 class Projectile
 {
 private:
 	sf::Vector2f pos = sf::Vector2f(50.f, 50.f);
+
+	float createdAtSeconds = 0.f;
+	float lifespanSeconds = 4.f;
 
 	// Shape
 	float size = 4.f;
@@ -27,12 +30,27 @@ private:
 	sf::Vector2f speed = sf::Vector2f(0.f, 0.f);
 	float maxSpeed = 8.f;
 
+	// Collisions
+	bool hasBeenHit = false;
+	bool collisionWithAsteroids(std::vector<Asteroid>&);
+	bool collisionChecks(std::vector<Asteroid>&);
+
+	void die();
+	bool alive = true;
+
 public:
 	Projectile();
+	Projectile(sf::Vector2f, float, sf::Clock&);
 	~Projectile();
 
-	void update(sf::Vector2f);
+	sf::VertexArray getCollider();
+
+	bool isAlive();
+
+	void update(sf::Vector2f, std::vector<Asteroid>&);
 	void postUpdate();
+
+	bool hasExpired(sf::Clock&);
 
 	void draw(Window&);
 };

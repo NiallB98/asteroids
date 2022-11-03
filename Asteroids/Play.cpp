@@ -119,14 +119,14 @@ void Play::draw(Window& window)
 	drawUI(window);
 }
 
-void Play::pollPlayerEvents(sf::Event event)
+void Play::pollPlayerEvents(sf::Event event, sf::Clock& clock)
 {
-	player.pollEvents(event);
+	player.pollEvents(event, clock, playerProjectiles);
 }
 
-void Play::pollEvents(sf::Event& event)
+void Play::pollEvents(sf::Event& event, sf::Clock& clock)
 {
-	pollPlayerEvents(event);
+	pollPlayerEvents(event, clock);
 }
 
 void Play::updatePlayer()
@@ -137,41 +137,42 @@ void Play::updatePlayer()
 void Play::updateAsteroids()
 {
 	for (int i = 0; i < asteroids.size(); i++)
-		asteroids[i].update(windowDimensions);
+		asteroids[i].update(windowDimensions, playerProjectiles);
 }
 
 void Play::updateProjectiles()
 {
 	// Player projectiles
 	for (int i = 0; i < playerProjectiles.size(); i++)
-		playerProjectiles[i].update(windowDimensions);
+		playerProjectiles[i].update(windowDimensions, asteroids);
 
 	// Enemy projectiles
 	for (int i = 0; i < enemyProjectiles.size(); i++)
-		enemyProjectiles[i].update(windowDimensions);
+		enemyProjectiles[i].update(windowDimensions, asteroids);
 }
 
 // Handles polling events and game logic
-void Play::update(sf::Event& event)
+void Play::update(sf::Event& event, sf::Clock& clock)
 {
-	pollEvents(event);
+	pollEvents(event, clock);
 
 	updatePlayer();
 	updateAsteroids();
+	// Update projectiles last so as objects colliding with them can ignore projectile speed in collision checks
 	updateProjectiles();
 }
 
 // Post update stage
-void Play::postUpdatePlayer()
+void Play::postUpdatePlayer(sf::Clock& clock)
 {
-	player.postUpdate();
+	player.postUpdate(clock);
 }
 
 void Play::postUpdateAsteroids()
 {
 	// Player projectiles
 	for (int i = 0; i < asteroids.size(); i++)
-		asteroids[i].postUpdate();
+		asteroids[i].postUpdate(score);
 }
 
 void Play::postUpdateProjectiles()
@@ -191,12 +192,30 @@ void Play::showDeathScreen()
 	score.initDeathScreenSettings(windowDimensions);
 }
 
-void Play::postUpdate()
+void Play::checkExpiredObjects(sf::Clock& clock)
 {
-	postUpdatePlayer();
-	postUpdateAsteroids();
-	postUpdateProjectiles();
+	// Checking player projectiles
+	for (int i = playerProjectiles.size() - 1; i >= 0; i--)
+	{
+		if (playerProjectiles[i].hasExpired(clock))
+		{
+			playerProjectiles.erase(playerProjectiles.begin() + i);
+		}
+	}
+}
 
+void Play::checkDeadObjects()
+{
+	// Asteroids
+	for (int i = asteroids.size() - 1; i >= 0; i--)
+	{
+		if (not asteroids[i].isAlive())
+		{
+			asteroids.erase(asteroids.begin() + i);
+		}
+	}
+	
+	// Player
 	if (not player.isAlive() && lives.getLives() > 0)
 	{
 		player = Player();
@@ -207,4 +226,23 @@ void Play::postUpdate()
 	{
 		showDeathScreen();
 	}
+
+	// Player projectiles
+	for (int i = playerProjectiles.size() - 1; i >= 0; i--)
+	{
+		if (not playerProjectiles[i].isAlive())
+		{
+			playerProjectiles.erase(playerProjectiles.begin() + i);
+		}
+	}
+}
+
+void Play::postUpdate(sf::Clock& clock)
+{
+	postUpdatePlayer(clock);
+	postUpdateAsteroids();
+	postUpdateProjectiles();
+
+	checkExpiredObjects(clock);
+	checkDeadObjects();
 }
