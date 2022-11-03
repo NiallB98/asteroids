@@ -17,7 +17,7 @@ namespace clsn
 			(line[0].position.x - circle.getPosition().x) * (line[0].position.x - circle.getPosition().x) +
 			(line[0].position.y - circle.getPosition().y) * (line[0].position.y - circle.getPosition().y));
 
-		float radius = std::floor(circle.getRadius());
+		float radius = circle.getRadius();
 
 		if (distanceFromCircleCentre < radius)
 			return true;
