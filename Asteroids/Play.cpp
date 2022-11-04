@@ -151,6 +151,11 @@ void Play::updateProjectiles()
 		enemyProjectiles[i].update(windowDimensions, asteroids);
 }
 
+void Play::updateLives()
+{
+	lives.update(score);
+}
+
 // Handles polling events and game logic
 void Play::update(sf::Event& event, sf::Clock& clock)
 {
@@ -160,6 +165,8 @@ void Play::update(sf::Event& event, sf::Clock& clock)
 	updateAsteroids();
 	// Update projectiles last so as objects colliding with them can ignore projectile speed in collision checks
 	updateProjectiles();
+
+	updateLives();
 }
 
 // Post update stage

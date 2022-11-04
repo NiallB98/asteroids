@@ -2,11 +2,16 @@
 
 #include "Window.h"
 
+class Score;
+
 class Lives
 {
 private:
+	int maxLives = 5;
 	int startingLives = 3;
 	int lives = startingLives;
+	int newLivesThreshold = 10000;
+	int newLivesThresholdMultiplier = 1;
 
 	// Drawing
 	sf::Font font;
@@ -18,6 +23,8 @@ private:
 	void initText();
 	void updateText();
 
+	void bonusLivesCheck(Score&);
+
 	bool showText = true;
 
 public:
@@ -28,9 +35,12 @@ public:
 
 	void refresh();
 	void loseOne();
+	void addOne();
 
 	void initDeathScreenSettings();
 
 	// Drawing
 	void draw(Window&);
+
+	void update(Score&);
 };

@@ -1,5 +1,7 @@
 #include "Lives.h"
 
+#include "Score.h"
+
 Lives::Lives()
 {
 	initText();
@@ -23,8 +25,20 @@ void Lives::refresh()
 
 void Lives::loseOne()
 {
-	lives--;
-	updateText();
+	if (lives > 0)
+	{
+		lives--;
+		updateText();
+	}
+}
+
+void Lives::addOne()
+{
+	if (lives < maxLives)
+	{
+		lives++;
+		updateText();
+	}
 }
 
 // Drawing
@@ -48,4 +62,19 @@ void Lives::draw(Window& window)
 {
 	if (showText)
 		window.draw(text);
+}
+
+void Lives::bonusLivesCheck(Score& score)
+{
+	if (score.getScore() >= newLivesThresholdMultiplier * newLivesThreshold)
+	{
+		addOne();
+	}
+
+	newLivesThresholdMultiplier++;
+}
+
+void Lives::update(Score& score)
+{
+	bonusLivesCheck(score);
 }

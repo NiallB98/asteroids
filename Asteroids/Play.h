@@ -43,6 +43,8 @@ private:
 	void updateAsteroids();
 	void updateProjectiles();
 
+	void updateLives();
+
 	void showDeathScreen();
 
 	// Post updating
