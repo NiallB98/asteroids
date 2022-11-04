@@ -1,5 +1,7 @@
 #include "Play.h"
 
+#include "Controls.h"
+
 Play::Play()
 {
 	updateWindowDimensions(sf::Vector2f(720.f, 720.f));
@@ -119,14 +121,14 @@ void Play::draw(Window& window)
 	drawUI(window);
 }
 
-void Play::pollPlayerEvents(sf::Event event, sf::Clock& clock)
+void Play::pollPlayerEvents(sf::Event event, sf::Clock& clock, Controls& controls)
 {
-	player.pollEvents(event, clock, playerProjectiles);
+	player.pollEvents(event, clock, controls, playerProjectiles);
 }
 
-void Play::pollEvents(sf::Event& event, sf::Clock& clock)
+void Play::pollEvents(sf::Event& event, sf::Clock& clock, Controls& controls)
 {
-	pollPlayerEvents(event, clock);
+	pollPlayerEvents(event, clock, controls);
 }
 
 void Play::updatePlayer()
@@ -157,9 +159,9 @@ void Play::updateLives()
 }
 
 // Handles polling events and game logic
-void Play::update(sf::Event& event, sf::Clock& clock)
+void Play::update(sf::Event& event, sf::Clock& clock, Controls& controls)
 {
-	pollEvents(event, clock);
+	pollEvents(event, clock, controls);
 
 	updatePlayer();
 	updateAsteroids();

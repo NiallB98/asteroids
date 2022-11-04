@@ -4,6 +4,7 @@
 
 class Asteroid;
 class Projectile;
+class Controls;
 
 class Player
 {
@@ -72,7 +73,7 @@ public:
 	void accelerate();
 
 	// Updating and events
-	void pollEvents(sf::Event&, sf::Clock&, std::vector<Projectile>&);
+	void pollEvents(sf::Event&, sf::Clock&, Controls&, std::vector<Projectile>&);
 	void update(sf::Vector2f, std::vector<Asteroid>&);
 	void postUpdate(sf::Clock&);
 

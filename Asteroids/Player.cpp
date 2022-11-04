@@ -2,6 +2,7 @@
 
 #include "Asteroid.h"
 #include "Projectile.h"
+#include "Controls.h"
 
 Player::Player()
 {
@@ -174,15 +175,15 @@ void Player::fireProjectile(std::vector<Projectile>& playerProjectiles, sf::Cloc
 	}
 }
 
-void Player::pollEvents(sf::Event& event, sf::Clock& clock, std::vector<Projectile>& playerProjectiles)
+void Player::pollEvents(sf::Event& event, sf::Clock& clock, Controls& controls, std::vector<Projectile>& playerProjectiles)
 {
 	// Rotation
 	int rotationDir = 0;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+	if (controls.isTurnRightPressed())
 	{
 		rotationDir++;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+	if (controls.isTurnLeftPressed())
 	{
 		rotationDir--;
 	}
@@ -192,10 +193,10 @@ void Player::pollEvents(sf::Event& event, sf::Clock& clock, std::vector<Projecti
 	}
 
 	// Forward movement
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+	if (controls.isForwardPressed())
 		accelerate();
 	// Firing projectiles
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	if (controls.isShootPressed())
 		fireProjectile(playerProjectiles, clock);
 }
 

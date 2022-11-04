@@ -65,7 +65,7 @@ void Game::update()
 		levelMenu->update(event);
 		break;
 	case PLAY:
-		levelPlay->update(event, clock);
+		levelPlay->update(event, clock, controls);
 		break;
 	default:
 		break;

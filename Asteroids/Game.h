@@ -14,6 +14,7 @@
 #include "Window.h"
 #include "Play.h"
 #include "Menu.h"
+#include "Controls.h"
 
 #define MENU 0
 #define PLAY 1
@@ -23,6 +24,8 @@ class Game
 private:
 	Window window;
 	sf::Event event;
+
+	Controls controls;
 
 	// Levels
 	int currentLevel = 0;
