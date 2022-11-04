@@ -76,6 +76,12 @@
     <Filter Include="Header Files\common">
       <UniqueIdentifier>{652c3d2d-0d56-44c7-b827-0591fcfe0278}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\font">
+      <UniqueIdentifier>{5f270797-4137-48e0-84cb-b60fc3b90c7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\icon">
+      <UniqueIdentifier>{ce1b2f27-d649-4e2b-8a14-65038ff7b851}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -199,15 +205,15 @@
       <Filter>Resource Files\images\icon</Filter>
     </Image>
     <Image Include="icon\icon.ico">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\icon</Filter>
     </Image>
     <Image Include="icon\icon.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\icon</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="font\VectorBattle.ttf">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\font</Filter>
     </Font>
   </ItemGroup>
 </Project>
