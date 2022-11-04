@@ -218,7 +218,7 @@ void Play::checkDeadObjects()
 	// Player
 	if (not player.isAlive() && lives.getLives() > 0)
 	{
-		player = Player();
+		player = Player(clock);
 		initPlayer();
 		lives.loseOne();
 	}
@@ -244,5 +244,5 @@ void Play::postUpdate(sf::Clock& clock)
 	postUpdateProjectiles();
 
 	checkExpiredObjects(clock);
-	checkDeadObjects();
+	checkDeadObjects(clock);
 }

@@ -10,7 +10,8 @@ class Player
 private:
 	bool alive = true;
 	bool invincible = true;
-	float invincibleDurationSecs = 3;
+	float invincibleDurationSecs = 3.f;
+	float playerStartSeconds = 0.f;
 
 	void removeInvincible();
 	void die();
@@ -59,6 +60,7 @@ private:
 
 public:
 	Player();
+	Player(sf::Clock);
 	~Player();
 
 	bool isAlive();

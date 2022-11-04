@@ -9,6 +9,14 @@ Player::Player()
 	initShape();
 }
 
+Player::Player(sf::Clock clock)
+{
+	playerStartSeconds = clock.getElapsedTime().asSeconds();
+
+	initCollider();
+	initShape();
+}
+
 Player::~Player()
 {
 	
@@ -229,6 +237,6 @@ void Player::update(sf::Vector2f windowDims, std::vector<Asteroid>& asteroids)
 
 void Player::postUpdate(sf::Clock& clock)
 {
-	if (isInvincible() && invincibleDurationSecs < clock.getElapsedTime().asSeconds())
+	if (isInvincible() && playerStartSeconds + invincibleDurationSecs < clock.getElapsedTime().asSeconds())
 		removeInvincible();
 }
