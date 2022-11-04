@@ -157,7 +157,7 @@ void Player::updatePos(sf::Vector2f windowDims)
 
 void Player::fireProjectile(std::vector<Projectile>& playerProjectiles, sf::Clock& clock)
 {
-	if (lastFiredSeconds < clock.getElapsedTime().asSeconds() - fireCooldownSeconds)
+	if (lastFiredSeconds < clock.getElapsedTime().asSeconds() - fireCooldownSeconds && isAlive())
 	{
 		std::vector<Projectile>::iterator p = playerProjectiles.end();
 		playerProjectiles.insert(p, Projectile(cannonPos, rotationDegrees, clock));
