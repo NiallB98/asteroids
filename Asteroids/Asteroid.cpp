@@ -10,9 +10,34 @@ Asteroid::Asteroid()
 	mvmt::setRandomRotation(rotationDegrees, rotationSpeedDegrees, minMaxRotationSpeedDegrees);
 }
 
+Asteroid::Asteroid(sf::Vector2f newPos)
+{
+	initShape();
+	mvmt::setRandomVelocity(speed, minMaxSpeed);
+	mvmt::setRandomRotation(rotationDegrees, rotationSpeedDegrees, minMaxRotationSpeedDegrees);
+
+	setPos(newPos);
+}
+
+Asteroid::Asteroid(sf::Vector2f newPos, int newSize)
+{
+	size = newSize;
+	
+	initShape();
+	mvmt::setRandomVelocity(speed, minMaxSpeed);
+	mvmt::setRandomRotation(rotationDegrees, rotationSpeedDegrees, minMaxRotationSpeedDegrees);
+
+	setPos(newPos);
+}
+
 Asteroid::~Asteroid()
 {
 
+}
+
+int Asteroid::getSize()
+{
+	return size;
 }
 
 float Asteroid::getRadius()
@@ -111,6 +136,11 @@ bool Asteroid::isAlive()
 	return size > 0;
 }
 
+bool Asteroid::doSplit()
+{
+	return splitting;
+}
+
 // Drawing
 void Asteroid::drawCollider(Window& window)
 {
@@ -136,6 +166,11 @@ void Asteroid::setPos(sf::Vector2f newPos)
 	collider.setPosition(newPos);
 
 	updateVertexArray();
+}
+
+sf::Vector2f Asteroid::getPos()
+{
+	return pos;
 }
 
 void Asteroid::rotate()
@@ -181,9 +216,25 @@ void Asteroid::update(sf::Vector2f windowDims, std::vector<Projectile>& playerPr
 		collisionChecks(playerProjectiles);
 }
 
+void Asteroid::split()
+{
+	splitting = true;
+}
+
+void Asteroid::clearSplit()
+{
+	splitting = false;
+}
+
 void Asteroid::reduce(Score& score)
 {
+	mvmt::setRandomVelocity(speed, minMaxSpeed);
+	mvmt::setRandomRotation(rotationDegrees, rotationSpeedDegrees, minMaxRotationSpeedDegrees);
+
+	firstFrame = true;
+	
 	hit(score);
+	split();
 }
 
 void Asteroid::die(Score& score)
@@ -193,7 +244,7 @@ void Asteroid::die(Score& score)
 
 void Asteroid::postUpdate(Score& score)
 {
-	if (hasBeenHit)
+	if (hasBeenHit and not firstFrame)
 	{
 		if (size > 1)
 			reduce(score);
@@ -201,4 +252,6 @@ void Asteroid::postUpdate(Score& score)
 			die(score);
 		hasBeenHit = false;
 	}
+	else if (firstFrame)
+		firstFrame = false;
 }

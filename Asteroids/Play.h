@@ -48,6 +48,7 @@ private:
 	// Post updating
 	void checkExpiredObjects(sf::Clock&);
 	void checkDeadObjects(sf::Clock&);
+	void checkSplittingAsteroids();
 
 	void postUpdatePlayer(sf::Clock&);
 	void postUpdateAsteroids();

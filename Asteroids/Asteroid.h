@@ -8,9 +8,11 @@ class Score;
 class Asteroid
 {
 private:
+	bool firstFrame = true;
+
 	int size = 3;
 	float maxRadiusFactor = 18;
-	float minRadiusFactor = 9;
+	float minRadiusFactor = 10;
 	float getRadius();
 	float getRadius(int);
 
@@ -26,7 +28,7 @@ private:
 	std::vector<float> vertexRadius = std::vector<float>(vertices);
 
 	// Collider
-	bool doDrawCollider = true;
+	bool doDrawCollider = false;
 	sf::CircleShape collider;
 	void initCollider();
 	void resetCollider();
@@ -55,16 +57,26 @@ private:
 
 	void die(Score&);
 	void reduce(Score&);
+	void split();
+
+	bool splitting = false;
 
 public:
 	Asteroid();
+	Asteroid(sf::Vector2f);
+	Asteroid(sf::Vector2f, int);
 	~Asteroid();
 
 	bool isAlive();
 	sf::CircleShape getCollider();
+	bool doSplit();
+	void clearSplit();
+
+	int getSize();
 
 	// Movement
 	void setPos(sf::Vector2f);
+	sf::Vector2f getPos();
 
 	// Update
 	void update(sf::Vector2f, std::vector<Projectile>&);

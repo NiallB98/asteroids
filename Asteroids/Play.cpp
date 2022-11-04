@@ -204,7 +204,7 @@ void Play::checkExpiredObjects(sf::Clock& clock)
 	}
 }
 
-void Play::checkDeadObjects()
+void Play::checkDeadObjects(sf::Clock& clock)
 {
 	// Asteroids
 	for (int i = asteroids.size() - 1; i >= 0; i--)
@@ -237,6 +237,40 @@ void Play::checkDeadObjects()
 	}
 }
 
+void Play::checkSplittingAsteroids()
+{
+	std::vector<sf::Vector2f> newAsteroidPositions;
+	newAsteroidPositions.reserve(asteroids.size());
+	std::vector<sf::Vector2f>::iterator p1;
+
+	std::vector<int> newAsteroidSizes;
+	newAsteroidSizes.reserve(asteroids.size());
+	std::vector<int>::iterator p2;
+
+	// Getting positions and sizes for new asteroids
+	for (int i = 0; i < asteroids.size(); i++)
+	{
+		if (asteroids[i].doSplit())
+		{
+			p1 = newAsteroidPositions.end();
+			p2 = newAsteroidSizes.end();
+
+			newAsteroidPositions.insert(p1, asteroids[i].getPos());
+			newAsteroidSizes.insert(p2, asteroids[i].getSize());
+
+			asteroids[i].clearSplit();
+		}
+	}
+
+	// Adding in new asteroids
+	std::vector<Asteroid>::iterator p = asteroids.end();
+	for (int i = 0; i < newAsteroidPositions.size(); i++)
+	{
+		asteroids.insert(p, Asteroid(newAsteroidPositions[i], newAsteroidSizes[i]));
+		p = asteroids.end();
+	}
+}
+
 void Play::postUpdate(sf::Clock& clock)
 {
 	postUpdatePlayer(clock);
@@ -245,4 +279,5 @@ void Play::postUpdate(sf::Clock& clock)
 
 	checkExpiredObjects(clock);
 	checkDeadObjects(clock);
+	checkSplittingAsteroids();
 }
