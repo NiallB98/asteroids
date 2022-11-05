@@ -66,7 +66,7 @@ private:
 	sf::Joystick::Axis controllerVolumeDPadAxis = dPadX;
 	int controllerMute = buttonBack;
 
-	// (Max position for axis are +/-100.f)
+	// Deadzones (Max position for axis are +/-100.f)
 	float controllerTriggerDeadzone = 10.f;
 	float controllerStickDeadzone = 10.f;
 	float controllerDPadDeadzone = 50.f;
