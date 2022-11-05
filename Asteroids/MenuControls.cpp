@@ -1,5 +1,7 @@
 #include "MenuControls.h"
 
+#include "Controls.h"
+
 MenuControls::MenuControls()
 {
 
@@ -10,15 +12,15 @@ MenuControls::~MenuControls()
 
 }
 
-void MenuControls::pollEvents(sf::Event& event)
+void MenuControls::pollEvents(sf::Event& event, Controls& controls)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	if (controls.isStartGamePressed())
 		goToPlay = true;
 }
 
-void MenuControls::update(sf::Event& event)
+void MenuControls::update(sf::Event& event, Controls& controls)
 {
-	pollEvents(event);
+	pollEvents(event, controls);
 }
 
 void MenuControls::postUpdate()

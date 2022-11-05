@@ -1,9 +1,12 @@
 #pragma once
 
 #include "Window.h"
+
 #include "Title.h"
 #include "MenuControlHint.h"
 #include "MenuControls.h"
+
+class Controls;
 
 class Menu
 {
@@ -24,7 +27,7 @@ public:
 	void updateWindowDimensions(sf::Vector2f);
 	void draw(Window&);
 
-	void update(sf::Event&);
+	void update(sf::Event&, Controls&);
 	void postUpdate();
 
 	bool playNow();

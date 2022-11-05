@@ -48,7 +48,7 @@ void Game::pollGlobalEvents()
 	}
 
 	// Quit game key
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
+	if (controls.isQuitGamePressed())
 	{
 		window.close();
 	}
@@ -62,7 +62,7 @@ void Game::update()
 	switch (currentLevel)
 	{
 	case MENU:
-		levelMenu->update(event);
+		levelMenu->update(event, controls);
 		break;
 	case PLAY:
 		levelPlay->update(event, clock, controls);

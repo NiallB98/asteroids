@@ -1,5 +1,7 @@
 #include "Menu.h"
 
+#include "Controls.h"
+
 Menu::Menu()
 {
 
@@ -26,9 +28,9 @@ void Menu::draw(Window& window)
 	menuControlHint.draw(window);
 }
 
-void Menu::update(sf::Event& event)
+void Menu::update(sf::Event& event, Controls& controls)
 {
-	menuControls.update(event);
+	menuControls.update(event, controls);
 }
 void Menu::postUpdate()
 {
