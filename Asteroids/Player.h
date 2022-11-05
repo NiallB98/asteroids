@@ -55,7 +55,7 @@ private:
 
 	// Firing projectiles
 	sf::Vector2f cannonPos;
-	float fireCooldownSeconds = 0.6f;
+	float fireCooldownSeconds = 0.5f;
 	float lastFiredSeconds = -fireCooldownSeconds / 2.f;
 	void fireProjectile(std::vector<Projectile>&, sf::Clock&);
 
