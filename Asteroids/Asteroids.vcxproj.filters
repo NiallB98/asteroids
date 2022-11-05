@@ -82,6 +82,12 @@
     <Filter Include="Resource Files\icon">
       <UniqueIdentifier>{ce1b2f27-d649-4e2b-8a14-65038ff7b851}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\audio">
+      <UniqueIdentifier>{0b79c21b-b966-4f73-b488-09362ef6674f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\audio\effects">
+      <UniqueIdentifier>{fea2ae83-7307-4315-81c4-343fde8e186e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -221,5 +227,13 @@
     <Font Include="font\VectorBattle.ttf">
       <Filter>Resource Files\font</Filter>
     </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="audio\effects\explosion.wav">
+      <Filter>Resource Files\audio\effects</Filter>
+    </Media>
+    <Media Include="audio\effects\shoot.wav">
+      <Filter>Resource Files\audio\effects</Filter>
+    </Media>
   </ItemGroup>
 </Project>

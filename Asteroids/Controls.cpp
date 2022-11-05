@@ -40,6 +40,21 @@ sf::Keyboard::Key Controls::getKeyboardQuitGame()
 	return keyboardQuitGame;
 }
 
+sf::Keyboard::Key Controls::getKeyboardVolumeUp()
+{
+	return keyboardVolumeUp;
+}
+
+sf::Keyboard::Key Controls::getKeyboardVolumeDown()
+{
+	return keyboardVolumeDown;
+}
+
+sf::Keyboard::Key Controls::getKeyboardMute()
+{
+	return keyboardMute;
+}
+
 bool Controls::isForwardPressed()
 {
 	// Checking for joystick input first
@@ -118,4 +133,41 @@ bool Controls::isQuitGamePressed()
 
 	// Checking for keyboard input
 	return sf::Keyboard::isKeyPressed(getKeyboardQuitGame());
+}
+
+bool Controls::isVolumeUpPressed()
+{
+	if (sf::Joystick::isConnected(0))
+	{
+		if (sf::Joystick::getAxisPosition(0, controllerVolumeDPadAxis) > controllerDPadDeadzone)
+			return true;
+	}
+
+	// Checking for keyboard input
+	return sf::Keyboard::isKeyPressed(getKeyboardVolumeUp());
+}
+
+bool Controls::isVolumeDownPressed()
+{
+	if (sf::Joystick::isConnected(0))
+	{
+		if (sf::Joystick::getAxisPosition(0, controllerVolumeDPadAxis) < -controllerDPadDeadzone)
+			return true;
+	}
+
+	// Checking for keyboard input
+	return sf::Keyboard::isKeyPressed(getKeyboardVolumeDown());
+}
+
+bool Controls::isMutePressed()
+{
+	// Checking for joystick input first
+	if (sf::Joystick::isConnected(0))
+	{
+		if (sf::Joystick::isButtonPressed(0, controllerMute))
+			return true;
+	}
+
+	// Checking for keyboard input
+	return sf::Keyboard::isKeyPressed(getKeyboardMute());
 }
