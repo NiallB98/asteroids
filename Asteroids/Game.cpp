@@ -52,6 +52,20 @@ void Game::pollGlobalEvents()
 	{
 		window.close();
 	}
+	
+	// Volume controls
+	if (controls.isVolumeUpPressed())
+	{
+
+	}
+	else if (controls.isVolumeDownPressed())
+	{
+
+	}
+	else if (controls.isMutePressed())
+	{
+
+	}
 }
 
 // Handles frame by frame polling of events and game logic
