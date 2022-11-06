@@ -56,15 +56,15 @@ void Game::pollGlobalEvents()
 	// Volume controls
 	if (controls.isVolumeUpPressed())
 	{
-
+		audio.increaseVolume(5.f);
 	}
-	else if (controls.isVolumeDownPressed())
+	if (controls.isVolumeDownPressed())
 	{
-
+		audio.decreaseVolume(5.f);
 	}
-	else if (controls.isMutePressed())
+	if (controls.isMutePressed())
 	{
-
+		audio.toggleMute();
 	}
 }
 
