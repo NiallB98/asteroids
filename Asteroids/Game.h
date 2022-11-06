@@ -15,6 +15,7 @@
 #include "Play.h"
 #include "Menu.h"
 #include "Controls.h"
+#include "Audio.h"
 
 #define MENU 0
 #define PLAY 1
@@ -26,6 +27,8 @@ private:
 	sf::Event event;
 
 	Controls controls;
+
+	Audio audio;
 
 	// Levels
 	int currentLevel = 0;
