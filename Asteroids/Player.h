@@ -5,6 +5,7 @@
 class Asteroid;
 class Projectile;
 class Controls;
+class Audio;
 
 class Player
 {
@@ -57,7 +58,7 @@ private:
 	sf::Vector2f cannonPos;
 	float fireCooldownSeconds = 0.5f;
 	float lastFiredSeconds = -fireCooldownSeconds / 2.f;
-	void fireProjectile(std::vector<Projectile>&, sf::Clock&);
+	void fireProjectile(std::vector<Projectile>&, Audio&, sf::Clock&);
 
 public:
 	Player();
@@ -73,7 +74,7 @@ public:
 	void accelerate();
 
 	// Updating and events
-	void pollEvents(sf::Event&, sf::Clock&, Controls&, std::vector<Projectile>&);
+	void pollEvents(sf::Event&, Audio&, sf::Clock&, Controls&, std::vector<Projectile>&);
 	void update(sf::Vector2f, std::vector<Asteroid>&);
 	void postUpdate(sf::Clock&);
 

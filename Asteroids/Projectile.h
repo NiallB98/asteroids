@@ -1,6 +1,7 @@
 #include "Window.h"
 
 class Asteroid;
+class Audio;
 
 class Projectile
 {
@@ -40,7 +41,7 @@ private:
 
 public:
 	Projectile();
-	Projectile(sf::Vector2f, float, sf::Clock&);
+	Projectile(Audio&, sf::Vector2f, float, sf::Clock&);
 	~Projectile();
 
 	sf::VertexArray getCollider();

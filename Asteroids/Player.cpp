@@ -3,6 +3,7 @@
 #include "Asteroid.h"
 #include "Projectile.h"
 #include "Controls.h"
+#include "Audio.h"
 
 Player::Player()
 {
@@ -164,18 +165,19 @@ void Player::updatePos(sf::Vector2f windowDims)
 		setPos(pos);
 }
 
-void Player::fireProjectile(std::vector<Projectile>& playerProjectiles, sf::Clock& clock)
+void Player::fireProjectile(std::vector<Projectile>& playerProjectiles, Audio& audio, sf::Clock& clock)
 {
 	if (lastFiredSeconds < clock.getElapsedTime().asSeconds() - fireCooldownSeconds && isAlive())
 	{
 		std::vector<Projectile>::iterator p = playerProjectiles.end();
-		playerProjectiles.insert(p, Projectile(cannonPos, rotationDegrees, clock));
+		playerProjectiles.insert(p, Projectile(audio, cannonPos, rotationDegrees, clock));
 
 		lastFiredSeconds = clock.getElapsedTime().asSeconds();
 	}
 }
 
-void Player::pollEvents(sf::Event& event, sf::Clock& clock, Controls& controls, std::vector<Projectile>& playerProjectiles)
+void Player::pollEvents(sf::Event& event, Audio& audio, sf::Clock& clock, Controls& controls,
+	std::vector<Projectile>& playerProjectiles)
 {
 	// Rotation
 	int rotationDir = 0;
@@ -197,7 +199,7 @@ void Player::pollEvents(sf::Event& event, sf::Clock& clock, Controls& controls, 
 		accelerate();
 	// Firing projectiles
 	if (controls.isShootPressed())
-		fireProjectile(playerProjectiles, clock);
+		fireProjectile(playerProjectiles, audio, clock);
 }
 
 // Collision checking

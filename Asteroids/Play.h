@@ -39,7 +39,7 @@ private:
 	Lives lives;
 
 	// Polling events
-	void pollPlayerEvents(sf::Event, sf::Clock&, Controls&);
+	void pollPlayerEvents(sf::Event, Audio&, sf::Clock&, Controls&);
 
 	// Updating
 	void updatePlayer();
@@ -77,8 +77,8 @@ public:
 	void updateWindowDimensions(sf::Vector2f);
 
 	// Events and update
-	void pollEvents(sf::Event&, sf::Clock&, Controls&);
-	void update(sf::Event&, sf::Clock& clock, Controls&);
+	void pollEvents(sf::Event&, Audio&, sf::Clock&, Controls&);
+	void update(sf::Event&, Audio&, sf::Clock& clock, Controls&);
 
 	// Post updating
 	void postUpdate(sf::Clock&);

@@ -79,7 +79,7 @@ void Game::update()
 		levelMenu->update(event, controls);
 		break;
 	case PLAY:
-		levelPlay->update(event, clock, controls);
+		levelPlay->update(event, audio, clock, controls);
 		break;
 	default:
 		break;

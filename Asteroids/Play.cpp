@@ -124,14 +124,14 @@ void Play::draw(Window& window)
 	drawUI(window);
 }
 
-void Play::pollPlayerEvents(sf::Event event, sf::Clock& clock, Controls& controls)
+void Play::pollPlayerEvents(sf::Event event, Audio& audio, sf::Clock& clock, Controls& controls)
 {
-	player.pollEvents(event, clock, controls, playerProjectiles);
+	player.pollEvents(event, audio, clock, controls, playerProjectiles);
 }
 
-void Play::pollEvents(sf::Event& event, sf::Clock& clock, Controls& controls)
+void Play::pollEvents(sf::Event& event, Audio& audio, sf::Clock& clock, Controls& controls)
 {
-	pollPlayerEvents(event, clock, controls);
+	pollPlayerEvents(event, audio, clock, controls);
 }
 
 void Play::updatePlayer()
@@ -162,9 +162,9 @@ void Play::updateLives()
 }
 
 // Handles polling events and game logic
-void Play::update(sf::Event& event, sf::Clock& clock, Controls& controls)
+void Play::update(sf::Event& event, Audio& audio, sf::Clock& clock, Controls& controls)
 {
-	pollEvents(event, clock, controls);
+	pollEvents(event, audio, clock, controls);
 
 	updatePlayer();
 	updateAsteroids();

@@ -1,5 +1,7 @@
 #include "Projectile.h"
+
 #include "Asteroid.h"
+#include "Audio.h"
 
 Projectile::Projectile()
 {
@@ -7,7 +9,7 @@ Projectile::Projectile()
 	mvmt::setRandomVelocity(speed, maxSpeed, rotationDegrees);
 }
 
-Projectile::Projectile(sf::Vector2f newPos, float newRotationDegrees, sf::Clock& clock)
+Projectile::Projectile(Audio& audio, sf::Vector2f newPos, float newRotationDegrees, sf::Clock& clock)
 {
 	initShape();
 	rotationDegrees = newRotationDegrees;
@@ -19,6 +21,8 @@ Projectile::Projectile(sf::Vector2f newPos, float newRotationDegrees, sf::Clock&
 	setPos(newPos);
 
 	createdAtSeconds = clock.getElapsedTime().asSeconds();
+
+	audio.playShoot();
 }
 
 Projectile::~Projectile()
