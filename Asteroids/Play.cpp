@@ -175,9 +175,9 @@ void Play::updateExplosions()
 		explosions[i].update();
 }
 
-void Play::updateLives()
+void Play::updateLives(Audio& audio)
 {
-	lives.update(score);
+	lives.update(score, audio);
 }
 
 // Handles polling events and game logic
@@ -191,7 +191,7 @@ void Play::update(sf::Event& event, Audio& audio, sf::Clock& clock, Controls& co
 	updateProjectiles();
 	updateExplosions();
 
-	updateLives();
+	updateLives(audio);
 }
 
 // Post update stage

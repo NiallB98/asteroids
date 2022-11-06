@@ -3,6 +3,7 @@
 #include "Window.h"
 
 class Score;
+class Audio;
 
 class Lives
 {
@@ -23,7 +24,7 @@ private:
 	void initText();
 	void updateText();
 
-	void bonusLivesCheck(Score&);
+	void bonusLivesCheck(Score&, Audio&);
 
 	bool showText = true;
 
@@ -35,12 +36,12 @@ public:
 
 	void refresh();
 	void loseOne();
-	void addOne();
+	void addOne(Audio&);
 
 	void initDeathScreenSettings();
 
 	// Drawing
 	void draw(Window&);
 
-	void update(Score&);
+	void update(Score&, Audio&);
 };

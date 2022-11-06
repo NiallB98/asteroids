@@ -1,6 +1,7 @@
 #include "Lives.h"
 
 #include "Score.h"
+#include "Audio.h"
 
 Lives::Lives()
 {
@@ -32,12 +33,14 @@ void Lives::loseOne()
 	}
 }
 
-void Lives::addOne()
+void Lives::addOne(Audio& audio)
 {
 	if (lives < maxLives)
 	{
 		lives++;
 		updateText();
+
+		audio.playLifeUp();
 	}
 }
 
@@ -64,16 +67,16 @@ void Lives::draw(Window& window)
 		window.draw(text);
 }
 
-void Lives::bonusLivesCheck(Score& score)
+void Lives::bonusLivesCheck(Score& score, Audio& audio)
 {
 	if (score.getScore() >= newLivesThresholdMultiplier * newLivesThreshold)
 	{
-		addOne();
+		addOne(audio);
 		newLivesThresholdMultiplier++;
 	}
 }
 
-void Lives::update(Score& score)
+void Lives::update(Score& score, Audio& audio)
 {
-	bonusLivesCheck(score);
+	bonusLivesCheck(score, audio);
 }

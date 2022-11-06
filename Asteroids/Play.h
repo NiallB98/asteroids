@@ -51,7 +51,7 @@ private:
 
 	void updateExplosions();
 
-	void updateLives();
+	void updateLives(Audio&);
 
 	bool startedDeathScreen = false;
 	void showDeathScreen();
