@@ -28,9 +28,12 @@ private:
 	int maxAsteroids = 42 * 3;
 	int maxPlayerProjectiles = 128;
 	int maxEnemyProjectiles = 128;
-	int maxExplosions = 42 * 3 + 1;
+	int maxExplosions = maxAsteroids + 1;
 
 	void initPlayer();
+	float playerRespawnDelaySeconds = 2.f;
+	float playerDiedAtSeconds = -1.f;
+	void respawnPlayer(sf::Clock);
 
 	void initAsteroids();
 	void initAsteroids(int);

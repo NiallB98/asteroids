@@ -36,6 +36,15 @@ void Play::initPlayer()
 	player.setPos(sf::Vector2f(windowDimensions.x / 2, windowDimensions.y / 2));
 }
 
+void Play::respawnPlayer(sf::Clock clock)
+{
+	player = Player(clock);
+	initPlayer();
+	lives.loseOne();
+
+	playerDiedAtSeconds = -1.f;
+}
+
 // This method sets the random positions and velocities of each asteroid
 void Play::initAsteroids(int num)
 {
@@ -273,15 +282,15 @@ void Play::checkDeadObjects(sf::Clock& clock, Audio& audio)
 	}
 	
 	// Player
-	if (not player.isAlive() && lives.getLives() > 0)
+	if (not player.isAlive() && lives.getLives() > 0 && playerDiedAtSeconds < 0.f)
 	{
 		addExplosion(audio, player.getPos(), 1, clock);
-
-		player = Player(clock);
-		initPlayer();
-		lives.loseOne();
+		playerDiedAtSeconds = clock.getElapsedTime().asSeconds();
 	}
-	else if (not player.isAlive() && not startedDeathScreen)
+	else if (not player.isAlive() && lives.getLives() > 0 && playerDiedAtSeconds +
+		playerRespawnDelaySeconds < clock.getElapsedTime().asSeconds())
+		respawnPlayer(clock);
+	else if (not player.isAlive() && not startedDeathScreen && lives.getLives() <= 0)
 	{
 		addExplosion(audio, player.getPos(), 1, clock);
 		showDeathScreen();
