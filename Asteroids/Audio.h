@@ -5,14 +5,17 @@
 class Audio
 {
 private:
+	std::string theme = "original";
+
 	float defaultVolume = 50.f;
 	float currentVolume = defaultVolume;
 	bool muted = false;
 	
-	sf::SoundBuffer bufferExplosion;
-	sf::Sound soundExplosion;
-	void loadExplosion();
-	bool loadedExplosion = false;
+	std::vector<sf::SoundBuffer> bufferExplosions;
+	std::vector<sf::Sound> soundExplosions;
+	void loadExplosion(int);
+	void loadExplosions();
+	std::vector<bool> loadedExplosions = std::vector<bool>(3, false);
 
 	sf::SoundBuffer bufferShoot;
 	sf::Sound soundShoot;
@@ -51,7 +54,7 @@ public:
 	Audio();
 	~Audio();
 
-	void playExplosion();
+	void playExplosion(int);
 	void playShoot();
 	void playRevive();
 	void playGameStart();

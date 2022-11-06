@@ -10,10 +10,10 @@ Audio::~Audio()
 
 }
 
-void Audio::playExplosion()
+void Audio::playExplosion(int size)
 {
-	if (loadedExplosion && not muted)
-		soundExplosion.play();
+	if (loadedExplosions[size-1] && not muted)
+		soundExplosions[size-1].play();
 }
 
 void Audio::playShoot()
@@ -50,7 +50,8 @@ void Audio::changeVolume(float volume)
 {
 	currentVolume = volume;
 
-	soundExplosion.setVolume(currentVolume);
+	for (int i = 0; i < soundExplosions.size(); i++)
+		soundExplosions[i].setVolume(currentVolume);
 	soundShoot.setVolume(currentVolume);
 	soundRevive.setVolume(currentVolume);
 	soundGameStart.setVolume(currentVolume);
@@ -82,20 +83,26 @@ void Audio::draw()
 	
 }
 
-void Audio::loadExplosion()
+void Audio::loadExplosion(int size)
 {
-	if (bufferExplosion.loadFromFile("audio/effects/explosion.wav"))
+	if (bufferExplosions[size-1].loadFromFile("audio/effects/" + theme +"/explosion" + std::to_string(size) + ".wav"))
 	{
-		soundExplosion.setBuffer(bufferExplosion);
-		soundExplosion.setVolume(currentVolume);
+		soundExplosions[size-1].setBuffer(bufferExplosions[size-1]);
+		soundExplosions[size-1].setVolume(currentVolume);
 
-		loadedExplosion = true;
+		loadedExplosions[size-1] = true;
 	}
+}
+
+void Audio::loadExplosions()
+{
+	for (int i = 0; i < bufferExplosions.size(); i++)
+		loadExplosion(i);
 }
 
 void Audio::loadShoot()
 {
-	if (bufferShoot.loadFromFile("audio/effects/shoot.wav"))
+	if (bufferShoot.loadFromFile("audio/effects/" + theme + "/shoot.wav"))
 	{
 		soundShoot.setBuffer(bufferShoot);
 		soundShoot.setVolume(currentVolume);
@@ -106,7 +113,7 @@ void Audio::loadShoot()
 
 void Audio::loadRevive()
 {
-	if (bufferRevive.loadFromFile("audio/effects/revive.wav"))
+	if (bufferRevive.loadFromFile("audio/effects/" + theme + "/revive.wav"))
 	{
 		soundRevive.setBuffer(bufferRevive);
 		soundRevive.setVolume(currentVolume);
@@ -117,7 +124,7 @@ void Audio::loadRevive()
 
 void Audio::loadGameStart()
 {
-	if (bufferGameStart.loadFromFile("audio/effects/gameStart.wav"))
+	if (bufferGameStart.loadFromFile("audio/effects/" + theme + "/gameStart.wav"))
 	{
 		soundGameStart.setBuffer(bufferGameStart);
 		soundGameStart.setVolume(currentVolume);
@@ -128,7 +135,7 @@ void Audio::loadGameStart()
 
 void Audio::loadGameOver()
 {
-	if (bufferGameOver.loadFromFile("audio/effects/gameOver.wav"))
+	if (bufferGameOver.loadFromFile("audio/effects/" + theme + "/gameOver.wav"))
 	{
 		soundGameOver.setBuffer(bufferGameOver);
 		soundGameOver.setVolume(currentVolume);
@@ -139,7 +146,7 @@ void Audio::loadGameOver()
 
 void Audio::loadLifeUp()
 {
-	if (bufferLifeUp.loadFromFile("audio/effects/lifeUp.wav"))
+	if (bufferLifeUp.loadFromFile("audio/effects/" + theme + "/lifeUp.wav"))
 	{
 		soundLifeUp.setBuffer(bufferLifeUp);
 		soundLifeUp.setVolume(currentVolume);
@@ -150,7 +157,7 @@ void Audio::loadLifeUp()
 
 void Audio::load()
 {
-	loadExplosion();
+	loadExplosions();
 	loadShoot();
 	loadRevive();
 	loadGameStart();

@@ -88,6 +88,12 @@
     <Filter Include="Resource Files\audio\effects">
       <UniqueIdentifier>{fea2ae83-7307-4315-81c4-343fde8e186e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\audio\effects\original">
+      <UniqueIdentifier>{2e690c65-b452-4bc5-9326-0d26859e297b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\audio\effects\custom">
+      <UniqueIdentifier>{e953bde8-3401-4f54-9e81-3ad4856741c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -235,11 +241,47 @@
     </Font>
   </ItemGroup>
   <ItemGroup>
-    <Media Include="audio\effects\explosion.wav">
-      <Filter>Resource Files\audio\effects</Filter>
+    <Media Include="audio\effects\custom\explosion1.wav">
+      <Filter>Resource Files\audio\effects\custom</Filter>
     </Media>
-    <Media Include="audio\effects\shoot.wav">
-      <Filter>Resource Files\audio\effects</Filter>
+    <Media Include="audio\effects\custom\shoot.wav">
+      <Filter>Resource Files\audio\effects\custom</Filter>
+    </Media>
+    <Media Include="audio\effects\original\beat1.wav">
+      <Filter>Resource Files\audio\effects\original</Filter>
+    </Media>
+    <Media Include="audio\effects\original\beat2.wav">
+      <Filter>Resource Files\audio\effects\original</Filter>
+    </Media>
+    <Media Include="audio\effects\original\explosion1.wav">
+      <Filter>Resource Files\audio\effects\original</Filter>
+    </Media>
+    <Media Include="audio\effects\original\explosion2.wav">
+      <Filter>Resource Files\audio\effects\original</Filter>
+    </Media>
+    <Media Include="audio\effects\original\explosion3.wav">
+      <Filter>Resource Files\audio\effects\original</Filter>
+    </Media>
+    <Media Include="audio\effects\original\lifeUp.wav">
+      <Filter>Resource Files\audio\effects\original</Filter>
+    </Media>
+    <Media Include="audio\effects\original\shoot.wav">
+      <Filter>Resource Files\audio\effects\original</Filter>
+    </Media>
+    <Media Include="audio\effects\original\thrust.wav">
+      <Filter>Resource Files\audio\effects\original</Filter>
+    </Media>
+    <Media Include="audio\effects\original\ufoLarge.wav">
+      <Filter>Resource Files\audio\effects\original</Filter>
+    </Media>
+    <Media Include="audio\effects\original\ufoSmall.wav">
+      <Filter>Resource Files\audio\effects\original</Filter>
+    </Media>
+    <Media Include="audio\effects\custom\explosion2.wav">
+      <Filter>Resource Files\audio\effects\custom</Filter>
+    </Media>
+    <Media Include="audio\effects\custom\explosion3.wav">
+      <Filter>Resource Files\audio\effects\custom</Filter>
     </Media>
   </ItemGroup>
 </Project>
