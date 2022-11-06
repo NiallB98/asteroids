@@ -71,6 +71,11 @@ private:
 	float controllerStickDeadzone = 10.f;
 	float controllerDPadDeadzone = 50.f;
 
+	// Toggles for events where they are only wanted to be called when initially pressed, then resets once released
+	bool hasReleasedVolumeUp = true;
+	bool hasReleasedVolumeDown = true;
+	bool hasReleasedMute = true;
+
 public:
 	Controls();
 	~Controls();

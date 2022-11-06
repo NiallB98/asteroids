@@ -137,37 +137,99 @@ bool Controls::isQuitGamePressed()
 
 bool Controls::isVolumeUpPressed()
 {
+	// Guard clause preventing true being returned if control has already been pressed without being released
+	if (not hasReleasedVolumeUp)
+	{
+		if (not (sf::Joystick::getAxisPosition(0, controllerVolumeDPadAxis) > controllerDPadDeadzone) &&
+			not sf::Keyboard::isKeyPressed(getKeyboardVolumeUp()))
+			hasReleasedVolumeUp = true;
+
+		return false;
+	}
+	
 	if (sf::Joystick::isConnected(0))
 	{
 		if (sf::Joystick::getAxisPosition(0, controllerVolumeDPadAxis) > controllerDPadDeadzone)
+		{
+			hasReleasedVolumeUp = false;
 			return true;
+		}
 	}
 
 	// Checking for keyboard input
-	return sf::Keyboard::isKeyPressed(getKeyboardVolumeUp());
+	if (sf::Keyboard::isKeyPressed(getKeyboardVolumeUp()))
+	{
+		hasReleasedVolumeUp = false;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 bool Controls::isVolumeDownPressed()
 {
+	// Guard clause preventing true being returned if control has already been pressed without being released
+	if (not hasReleasedVolumeDown)
+	{
+		if (not (sf::Joystick::getAxisPosition(0, controllerVolumeDPadAxis) < -controllerDPadDeadzone) &&
+			not sf::Keyboard::isKeyPressed(getKeyboardVolumeDown()))
+			hasReleasedVolumeDown = true;
+
+		return false;
+	}
+	
 	if (sf::Joystick::isConnected(0))
 	{
 		if (sf::Joystick::getAxisPosition(0, controllerVolumeDPadAxis) < -controllerDPadDeadzone)
+		{
+			hasReleasedVolumeDown = false;
 			return true;
+		}
 	}
 
 	// Checking for keyboard input
-	return sf::Keyboard::isKeyPressed(getKeyboardVolumeDown());
+	if (sf::Keyboard::isKeyPressed(getKeyboardVolumeDown()))
+	{
+		hasReleasedVolumeDown = false;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 bool Controls::isMutePressed()
 {
+	// Guard clause preventing true being returned if control has already been pressed without being released
+	if (not hasReleasedMute)
+	{
+		if (not sf::Joystick::isButtonPressed(0, controllerMute) && not sf::Keyboard::isKeyPressed(getKeyboardMute()))
+			hasReleasedMute = true;
+
+		return false;
+	}
+	
 	// Checking for joystick input first
 	if (sf::Joystick::isConnected(0))
 	{
 		if (sf::Joystick::isButtonPressed(0, controllerMute))
+		{
+			hasReleasedMute = false;
 			return true;
+		}
 	}
 
 	// Checking for keyboard input
-	return sf::Keyboard::isKeyPressed(getKeyboardMute());
+	if (sf::Keyboard::isKeyPressed(getKeyboardMute()))
+	{
+		hasReleasedMute = false;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
