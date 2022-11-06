@@ -63,7 +63,7 @@ private:
 
 	sf::Joystick::Axis controllerTurningJoystick = leftStickX;
 
-	sf::Joystick::Axis controllerVolumeDPadAxis = dPadX;
+	sf::Joystick::Axis controllerVolumeDPadAxis = dPadY;
 	int controllerMute = buttonBack;
 
 	// Deadzones (Max position for axis are +/-100.f)
