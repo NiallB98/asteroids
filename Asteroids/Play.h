@@ -3,6 +3,7 @@
 #include "Window.h"
 
 class Controls;
+class Audio;
 
 #include "Player.h"
 #include "Asteroid.h"
@@ -70,7 +71,7 @@ private:
 
 public:
 	Play();
-	Play(sf::Vector2f, int);
+	Play(Audio&, sf::Vector2f, int);
 	~Play();
 
 	void updateWindowDimensions(sf::Vector2f);

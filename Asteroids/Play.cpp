@@ -1,6 +1,7 @@
 #include "Play.h"
 
 #include "Controls.h"
+#include "Audio.h"
 
 Play::Play()
 {
@@ -10,12 +11,14 @@ Play::Play()
 	initProjectiles();
 }
 
-Play::Play(sf::Vector2f windowDims, int num)
+Play::Play(Audio& audio, sf::Vector2f windowDims, int num)
 {
 	updateWindowDimensions(windowDims);
 	initPlayer();
 	initAsteroids(num);
 	initProjectiles();
+
+	audio.playGameStart();
 }
 
 Play::~Play()
