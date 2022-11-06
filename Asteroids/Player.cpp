@@ -133,6 +133,11 @@ void Player::setPos(sf::Vector2f newPos)
 	updateVertexArray();
 }
 
+sf::Vector2f Player::getPos()
+{
+	return pos;
+}
+
 void Player::rotate(bool dir)
 {
 	rotationDegrees += rotationSpeed * (dir ? 1.f : -1.f);

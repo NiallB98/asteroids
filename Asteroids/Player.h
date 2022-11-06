@@ -70,6 +70,7 @@ public:
 
 	// Movement
 	void setPos(sf::Vector2f);
+	sf::Vector2f getPos();
 	void rotate(bool);
 	void accelerate();
 
