@@ -74,12 +74,12 @@ void Audio::toggleMute()
 	muted = not muted;
 }
 
-void Audio::draw()
+void Audio::draw(Window& window)
 {
 	if (muted)
-		drawMute();
+		drawMute(window);
 	else
-		drawVolume();
+		drawVolume(window);
 	
 }
 
@@ -97,7 +97,7 @@ void Audio::loadExplosion(int size)
 void Audio::loadExplosions()
 {
 	for (int i = 0; i < bufferExplosions.size(); i++)
-		loadExplosion(i);
+		loadExplosion(i+1);
 }
 
 void Audio::loadShoot()
@@ -170,12 +170,12 @@ void Audio::initShapes()
 
 }
 
-void Audio::drawVolume()
+void Audio::drawVolume(Window& window)
 {
 
 }
 
-void Audio::drawMute()
+void Audio::drawMute(Window& window)
 {
 
 }

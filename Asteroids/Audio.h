@@ -11,8 +11,8 @@ private:
 	float currentVolume = defaultVolume;
 	bool muted = false;
 	
-	std::vector<sf::SoundBuffer> bufferExplosions;
-	std::vector<sf::Sound> soundExplosions;
+	std::vector<sf::SoundBuffer> bufferExplosions = std::vector<sf::SoundBuffer>(3);
+	std::vector<sf::Sound> soundExplosions = std::vector<sf::Sound>(3);
 	void loadExplosion(int);
 	void loadExplosions();
 	std::vector<bool> loadedExplosions = std::vector<bool>(3, false);
@@ -47,8 +47,8 @@ private:
 	sf::RectangleShape volumeBarForeground;
 	sf::RectangleShape volumeBarBackground;
 	void initShapes();
-	void drawVolume();
-	void drawMute();
+	void drawVolume(Window&);
+	void drawMute(Window&);
 
 public:
 	Audio();
@@ -66,5 +66,5 @@ public:
 	void decreaseVolume(float);
 	void toggleMute();
 
-	void draw();
+	void draw(Window&);
 };

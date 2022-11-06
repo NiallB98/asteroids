@@ -128,7 +128,7 @@ void Game::postUpdate()
 		levelChanging();
 		break;
 	case PLAY:
-		levelPlay->postUpdate(clock);
+		levelPlay->postUpdate(clock, audio);
 		levelChanging();
 		break;
 	default:

@@ -10,6 +10,7 @@ class Audio;
 #include "Projectile.h"
 #include "Score.h"
 #include "Lives.h"
+#include "Explosion.h"
 
 class Play
 {
@@ -22,10 +23,12 @@ private:
 	std::vector<Asteroid> asteroids;
 	std::vector<Projectile> playerProjectiles = std::vector<Projectile>(0);
 	std::vector<Projectile> enemyProjectiles = std::vector<Projectile>(0);
+	std::vector<Explosion> explosions = std::vector<Explosion>(0);
 
 	int maxAsteroids = 42 * 3;
 	int maxPlayerProjectiles = 128;
 	int maxEnemyProjectiles = 128;
+	int maxExplosions = 42 * 3 + 1;
 
 	void initPlayer();
 
@@ -46,28 +49,36 @@ private:
 	void updateAsteroids();
 	void updateProjectiles();
 
+	void updateExplosions();
+
 	void updateLives();
 
+	bool startedDeathScreen = false;
 	void showDeathScreen();
 
 	// Post updating
 	void checkExpiredObjects(sf::Clock&);
-	void checkDeadObjects(sf::Clock&);
-	void checkSplittingAsteroids();
+	void checkDeadObjects(sf::Clock&, Audio&);
+	void checkSplittingAsteroids(sf::Clock&, Audio&);
 
 	void postUpdatePlayer(sf::Clock&);
 	void postUpdateAsteroids();
 	void postUpdateProjectiles();
 
+	void postUpdateExplosions(sf::Clock&);
+
 	// Drawing
 	void drawAsteroids(Window&);
 	void drawPlayer(Window&);
 	void drawProjectiles(Window&);
+	void drawExplosions(Window&);
 	void drawObjects(Window&);
 
 	void drawScore(Window&);
 	void drawLives(Window&);
 	void drawUI(Window&);
+
+	void addExplosion(Audio&, sf::Vector2f, int, sf::Clock&);
 
 public:
 	Play();
@@ -81,7 +92,7 @@ public:
 	void update(sf::Event&, Audio&, sf::Clock& clock, Controls&);
 
 	// Post updating
-	void postUpdate(sf::Clock&);
+	void postUpdate(sf::Clock&, Audio&);
 
 	// Drawing
 	void draw(Window&);

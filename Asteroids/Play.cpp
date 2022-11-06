@@ -98,6 +98,13 @@ void Play::drawObjects(Window& window)
 	drawAsteroids(window);
 	drawPlayer(window);
 	drawProjectiles(window);
+	drawExplosions(window);
+}
+
+void Play::drawExplosions(Window& window)
+{
+	for (int i = 0; i < explosions.size(); i++)
+		explosions[i].draw(window);
 }
 
 // Drawing UI
@@ -115,6 +122,12 @@ void Play::drawUI(Window& window)
 {
 	drawScore(window);
 	drawLives(window);
+}
+
+void Play::addExplosion(Audio& audio, sf::Vector2f pos, int size, sf::Clock& clock)
+{
+	std::vector<Explosion>::iterator p = explosions.end();
+	explosions.insert(p, Explosion(audio, pos, size, clock));
 }
 
 // Main drawing function
@@ -156,6 +169,12 @@ void Play::updateProjectiles()
 		enemyProjectiles[i].update(windowDimensions, asteroids);
 }
 
+void Play::updateExplosions()
+{
+	for (int i = 0; i < explosions.size(); i++)
+		explosions[i].update();
+}
+
 void Play::updateLives()
 {
 	lives.update(score);
@@ -170,6 +189,7 @@ void Play::update(sf::Event& event, Audio& audio, sf::Clock& clock, Controls& co
 	updateAsteroids();
 	// Update projectiles last so as objects colliding with them can ignore projectile speed in collision checks
 	updateProjectiles();
+	updateExplosions();
 
 	updateLives();
 }
@@ -198,6 +218,12 @@ void Play::postUpdateProjectiles()
 		enemyProjectiles[i].postUpdate();
 }
 
+void Play::postUpdateExplosions(sf::Clock& clock)
+{
+	for (int i = 0; i < explosions.size(); i++)
+		explosions[i].postUpdate(clock);
+}
+
 void Play::showDeathScreen()
 {
 	lives.initDeathScreenSettings();
@@ -214,15 +240,34 @@ void Play::checkExpiredObjects(sf::Clock& clock)
 			playerProjectiles.erase(playerProjectiles.begin() + i);
 		}
 	}
+
+	// Checking enemy projectiles
+	for (int i = enemyProjectiles.size() - 1; i >= 0; i--)
+	{
+		if (enemyProjectiles[i].hasExpired(clock))
+		{
+			enemyProjectiles.erase(enemyProjectiles.begin() + i);
+		}
+	}
+
+	// Checking explosions
+	for (int i = explosions.size() - 1; i >= 0; i--)
+	{
+		if (explosions[i].hasExpired())
+		{
+			explosions.erase(explosions.begin() + i);
+		}
+	}
 }
 
-void Play::checkDeadObjects(sf::Clock& clock)
+void Play::checkDeadObjects(sf::Clock& clock, Audio& audio)
 {
 	// Asteroids
 	for (int i = asteroids.size() - 1; i >= 0; i--)
 	{
 		if (not asteroids[i].isAlive())
 		{
+			addExplosion(audio, asteroids[i].getPos(), 1, clock);
 			asteroids.erase(asteroids.begin() + i);
 		}
 	}
@@ -230,13 +275,17 @@ void Play::checkDeadObjects(sf::Clock& clock)
 	// Player
 	if (not player.isAlive() && lives.getLives() > 0)
 	{
+		addExplosion(audio, player.getPos(), 1, clock);
+
 		player = Player(clock);
 		initPlayer();
 		lives.loseOne();
 	}
-	else if (not player.isAlive())
+	else if (not player.isAlive() && not startedDeathScreen)
 	{
+		addExplosion(audio, player.getPos(), 1, clock);
 		showDeathScreen();
+		startedDeathScreen = true;
 	}
 
 	// Player projectiles
@@ -249,7 +298,7 @@ void Play::checkDeadObjects(sf::Clock& clock)
 	}
 }
 
-void Play::checkSplittingAsteroids()
+void Play::checkSplittingAsteroids(sf::Clock& clock, Audio& audio)
 {
 	std::vector<sf::Vector2f> newAsteroidPositions;
 	newAsteroidPositions.reserve(asteroids.size());
@@ -264,6 +313,8 @@ void Play::checkSplittingAsteroids()
 	{
 		if (asteroids[i].doSplit())
 		{
+			addExplosion(audio, asteroids[i].getPos(), asteroids[i].getSize() + 1, clock);
+
 			p1 = newAsteroidPositions.end();
 			p2 = newAsteroidSizes.end();
 
@@ -283,13 +334,14 @@ void Play::checkSplittingAsteroids()
 	}
 }
 
-void Play::postUpdate(sf::Clock& clock)
+void Play::postUpdate(sf::Clock& clock, Audio& audio)
 {
 	postUpdatePlayer(clock);
 	postUpdateAsteroids();
 	postUpdateProjectiles();
+	postUpdateExplosions(clock);
 
 	checkExpiredObjects(clock);
-	checkDeadObjects(clock);
-	checkSplittingAsteroids();
+	checkDeadObjects(clock, audio);
+	checkSplittingAsteroids(clock, audio);
 }
