@@ -51,6 +51,8 @@ public:
 
 	void update();
 	void postUpdate();
+	void globalPreDraw();
+	void globalPostDraw();
 	void render();
 
 	bool isRunning();

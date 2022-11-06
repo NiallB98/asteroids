@@ -136,10 +136,23 @@ void Game::postUpdate()
 	}
 }
 
+void Game::globalPreDraw()
+{
+
+}
+
+void Game::globalPostDraw()
+{
+	// Drawing volume when it is updated
+	audio.draw(window);
+}
+
 // Controls rendering each new frame
 void Game::render()
 {
 	window.clear();
+
+	globalPreDraw();
 
 	switch (currentLevel)
 	{
@@ -152,6 +165,8 @@ void Game::render()
 	default:
 		break;
 	}
+
+	globalPostDraw();
 
 	window.display();
 	Game::deltaTimeClock.restart();
