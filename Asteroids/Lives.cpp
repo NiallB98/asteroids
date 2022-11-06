@@ -69,9 +69,8 @@ void Lives::bonusLivesCheck(Score& score)
 	if (score.getScore() >= newLivesThresholdMultiplier * newLivesThreshold)
 	{
 		addOne();
+		newLivesThresholdMultiplier++;
 	}
-
-	newLivesThresholdMultiplier++;
 }
 
 void Lives::update(Score& score)
