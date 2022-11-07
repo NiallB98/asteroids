@@ -5,17 +5,18 @@
 class Audio
 {
 private:
-	std::string theme = "original";
+	std::string theme = "custom";
 
 	float defaultVolume = 50.f;
 	float currentVolume = defaultVolume;
 	bool muted = false;
 	
-	std::vector<sf::SoundBuffer> bufferExplosions = std::vector<sf::SoundBuffer>(3);
-	std::vector<sf::Sound> soundExplosions = std::vector<sf::Sound>(3);
+	int numExplosionTypes = 4;
+	std::vector<sf::SoundBuffer> bufferExplosions = std::vector<sf::SoundBuffer>(numExplosionTypes);
+	std::vector<sf::Sound> soundExplosions = std::vector<sf::Sound>(numExplosionTypes);
 	void loadExplosion(int);
 	void loadExplosions();
-	std::vector<bool> loadedExplosions = std::vector<bool>(3, false);
+	std::vector<bool> loadedExplosions = std::vector<bool>(numExplosionTypes, false);
 
 	sf::SoundBuffer bufferShoot;
 	sf::Sound soundShoot;

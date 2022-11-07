@@ -12,8 +12,8 @@ Audio::~Audio()
 
 void Audio::playExplosion(int size)
 {
-	if (loadedExplosions[size-1] && not muted)
-		soundExplosions[size-1].play();
+	if (loadedExplosions[size] && not muted)
+		soundExplosions[size].play();
 }
 
 void Audio::playShoot()
@@ -85,19 +85,19 @@ void Audio::draw(Window& window)
 
 void Audio::loadExplosion(int size)
 {
-	if (bufferExplosions[size-1].loadFromFile("audio/effects/" + theme +"/explosion" + std::to_string(size) + ".wav"))
+	if (bufferExplosions[size].loadFromFile("audio/effects/" + theme +"/explosion" + std::to_string(size) + ".wav"))
 	{
-		soundExplosions[size-1].setBuffer(bufferExplosions[size-1]);
-		soundExplosions[size-1].setVolume(currentVolume);
+		soundExplosions[size].setBuffer(bufferExplosions[size]);
+		soundExplosions[size].setVolume(currentVolume);
 
-		loadedExplosions[size-1] = true;
+		loadedExplosions[size] = true;
 	}
 }
 
 void Audio::loadExplosions()
 {
 	for (int i = 0; i < bufferExplosions.size(); i++)
-		loadExplosion(i+1);
+		loadExplosion(i);
 }
 
 void Audio::loadShoot()

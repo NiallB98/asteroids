@@ -284,7 +284,7 @@ void Play::checkDeadObjects(sf::Clock& clock, Audio& audio)
 	// Player
 	if (not player.isAlive() && lives.getLives() > 0 && playerDiedAtSeconds < 0.f)
 	{
-		addExplosion(audio, player.getPos(), 1, clock);
+		addExplosion(audio, player.getPos(), 0, clock);
 		playerDiedAtSeconds = clock.getElapsedTime().asSeconds();
 	}
 	else if (not player.isAlive() && lives.getLives() > 0 && playerDiedAtSeconds +

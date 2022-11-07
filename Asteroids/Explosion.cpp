@@ -10,12 +10,15 @@ Explosion::Explosion()
 Explosion::Explosion(Audio& audio, sf::Vector2f newPos, int newSize, sf::Clock& clock)
 {
 	pos = newPos;
-	size = newSize;
+	if (newSize == 0)
+		size = 1;
+	else
+		size = newSize;
 	createdAtSeconds = clock.getElapsedTime().asSeconds();
 	
 	initShapes();
 
-	audio.playExplosion(size);
+	audio.playExplosion(newSize);
 }
 
 Explosion::~Explosion()
