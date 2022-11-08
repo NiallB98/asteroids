@@ -72,10 +72,11 @@ void AudioBar::update(sf::Clock& clock)
 	float currentTimeSeconds = clock.getElapsedTime().asSeconds();
 	if (createdTimeSeconds + lifetimeSolidSeconds + lifetimeTransparentSeconds < currentTimeSeconds)
 		expired = true;
-	else if (createdTimeSeconds + lifetimeSolidSeconds <= currentTimeSeconds)
+	else if (createdTimeSeconds + lifetimeSolidSeconds < currentTimeSeconds)
 	{
-		float newTransparency = std::min(maxTransparency - maxTransparency *
-			(currentTimeSeconds - createdTimeSeconds + lifetimeSolidSeconds) / lifetimeTransparentSeconds, 0.f);
+		float newTransparency = maxTransparency - std::min(maxTransparency * 
+			std::abs((currentTimeSeconds - createdTimeSeconds - lifetimeSolidSeconds) / lifetimeTransparentSeconds),
+			maxTransparency);
 
 		changeTransparency(newTransparency);
 	}
