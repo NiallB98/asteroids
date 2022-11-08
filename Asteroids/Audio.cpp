@@ -75,6 +75,17 @@ void Audio::toggleMute()
 {
 	muted = not muted;
 	showNewAudioBar = true;
+
+	if (muted)
+	{
+		for (int i = 0; i < soundExplosions.size(); i++)
+			soundExplosions[i].stop();
+		soundShoot.stop();
+		soundRevive.stop();
+		soundGameStart.stop();
+		soundGameOver.stop();
+		soundLifeUp.stop();
+	}
 }
 
 void Audio::draw(Window& window)
