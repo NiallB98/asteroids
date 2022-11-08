@@ -5,10 +5,11 @@ AudioBar::AudioBar()
 	initShapes(sf::Vector2f(720.f, 720.f));
 }
 
-AudioBar::AudioBar(sf::Vector2f windowDims, sf::Clock clock, float newVolume)
+AudioBar::AudioBar(sf::Vector2f windowDims, sf::Clock clock, float newVolume, bool isMuted)
 {
 	createdTimeSeconds = clock.getElapsedTime().asSeconds();
 	volume = newVolume;
+	muted = isMuted;
 
 	initShapes(windowDims);
 }
@@ -56,8 +57,21 @@ void AudioBar::updateShapes()
 void AudioBar::changeTransparency(float newTransparency)
 {
 	transparency = newTransparency;
-	backgroundRect.setFillColor(sf::Color(backgroundColourRGB.x, backgroundColourRGB.y, backgroundColourRGB.z, transparency));
-	foregroundRect.setFillColor(sf::Color(foregroundColourRGB.x, foregroundColourRGB.y, foregroundColourRGB.z, transparency));
+
+	sf::Vector3f frontColour, backColour;
+	if (muted)
+	{
+		frontColour = foregroundColourRGBMuted;
+		backColour = backgroundColourRGBMuted;
+	}
+	else
+	{
+		frontColour = foregroundColourRGB;
+		backColour = backgroundColourRGB;
+	}
+
+	backgroundRect.setFillColor(sf::Color(backColour.x, backColour.y, backColour.z, transparency));
+	foregroundRect.setFillColor(sf::Color(frontColour.x, frontColour.y, frontColour.z, transparency));
 }
 
 void AudioBar::changeVolume(float newVolume)

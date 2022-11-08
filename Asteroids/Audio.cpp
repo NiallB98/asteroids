@@ -183,10 +183,7 @@ void Audio::postUpdate()
 
 void Audio::showAudioBar(sf::Vector2f windowDims, sf::Clock& clock)
 {
-	for (int i = audioBars.size() - 1; i >= 0; i--)
-		audioBars.erase(audioBars.begin() + i);
-	
-	audioBars.push_back(AudioBar(windowDims, clock, currentVolume));
-	
+	audioBars.clear();
+	audioBars.push_back(AudioBar(windowDims, clock, currentVolume, muted));
 	showNewAudioBar = false;
 }
