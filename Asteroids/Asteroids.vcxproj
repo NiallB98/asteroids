@@ -153,6 +153,7 @@ xcopy "C:\C++\SFML-2.5.1\bin\*-d-2.dll" "$(TargetDir)" /Y</Command>
     <PostBuildEvent>
       <Command>XCOPY "C:\C++\SFML-2.5.1\bin\openal32.dll" "$(TargetDir)" /Y
 XCOPY "C:\C++\SFML-2.5.1\bin\*-2.dll" "$(TargetDir)" /Y
+DEL "$(TargetDir)*-d-2.dll" /Q
 DEL "$(TargetDir)*.pdb" /Q</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
