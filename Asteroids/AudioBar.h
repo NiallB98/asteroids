@@ -20,8 +20,8 @@ private:
 	// Shapes
 	sf::Vector2f posFromTopRight = sf::Vector2f(8.f, 8.f);
 	float minHeight = 64.f;
-	float heightToWinHeightRatio = 0.1;
-	float widthToHeightRatio = 0.3;
+	float heightToWinHeightRatio = 0.1f;
+	float widthToHeightRatio = 0.3f;
 	sf::Vector2f foregroundPadding = sf::Vector2f(2.f, 3.f);
 	sf::RectangleShape backgroundRect;
 	sf::RectangleShape foregroundRect;
