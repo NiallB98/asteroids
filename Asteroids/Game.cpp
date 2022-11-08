@@ -73,6 +73,8 @@ void Game::update()
 {
 	pollGlobalEvents();
 
+	audio.update(window.getDimensions(), clock);
+
 	switch (currentLevel)
 	{
 	case MENU:
@@ -121,6 +123,8 @@ void Game::levelChanging()
 
 void Game::postUpdate()
 {
+	audio.postUpdate();
+	
 	switch (currentLevel)
 	{
 	case MENU:

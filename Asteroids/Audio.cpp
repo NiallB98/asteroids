@@ -57,6 +57,8 @@ void Audio::changeVolume(float volume)
 	soundGameStart.setVolume(currentVolume);
 	soundGameOver.setVolume(currentVolume);
 	soundLifeUp.setVolume(currentVolume);
+
+	showNewAudioBar = true;
 }
 
 void Audio::increaseVolume(float increase)
@@ -72,15 +74,13 @@ void Audio::decreaseVolume(float decrease)
 void Audio::toggleMute()
 {
 	muted = not muted;
+	showNewAudioBar = true;
 }
 
 void Audio::draw(Window& window)
 {
-	if (muted)
-		drawMute(window);
-	else
-		drawVolume(window);
-	
+	for (int i = 0; i < audioBars.size(); i++)
+		audioBars[i].draw(window);
 }
 
 void Audio::loadExplosion(int size)
@@ -165,17 +165,28 @@ void Audio::load()
 	loadLifeUp();
 }
 
-void Audio::initShapes()
+void Audio::update(sf::Vector2f windowDims, sf::Clock& clock)
 {
-
+	if (showNewAudioBar)
+		showAudioBar(windowDims, clock);
+	
+	for (int i = 0; i < audioBars.size(); i++)
+		audioBars[i].update(clock);
 }
 
-void Audio::drawVolume(Window& window)
+void Audio::postUpdate()
 {
-
+	for (int i = audioBars.size() - 1; i >= 0; i--)
+		if (audioBars[i].hasExpired())
+			audioBars.erase(audioBars.begin() + i);
 }
 
-void Audio::drawMute(Window& window)
+void Audio::showAudioBar(sf::Vector2f windowDims, sf::Clock& clock)
 {
-
+	for (int i = audioBars.size() - 1; i >= 0; i--)
+		audioBars.erase(audioBars.begin() + i);
+	
+	audioBars.push_back(AudioBar(windowDims, clock, currentVolume));
+	
+	showNewAudioBar = false;
 }

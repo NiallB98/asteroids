@@ -159,6 +159,7 @@ DEL "$(TargetDir)*.pdb" /Q</Command>
   <ItemGroup>
     <ClCompile Include="Asteroid.cpp" />
     <ClCompile Include="Audio.cpp" />
+    <ClCompile Include="AudioBar.cpp" />
     <ClCompile Include="Controls.cpp" />
     <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -181,6 +182,7 @@ DEL "$(TargetDir)*.pdb" /Q</Command>
   <ItemGroup>
     <ClInclude Include="Asteroid.h" />
     <ClInclude Include="Audio.h" />
+    <ClInclude Include="AudioBar.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="Controls.h" />
     <ClInclude Include="Explosion.h" />

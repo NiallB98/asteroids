@@ -94,6 +94,12 @@
     <Filter Include="Resource Files\audio\effects\custom">
       <UniqueIdentifier>{e953bde8-3401-4f54-9e81-3ad4856741c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Game\Audio">
+      <UniqueIdentifier>{cd706696-3551-4af6-8b23-dfd0925de1a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Audio">
+      <UniqueIdentifier>{69223f5d-13c3-4dc0-9fbf-1f07bef6a269}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -155,6 +161,9 @@
     </ClCompile>
     <ClCompile Include="Explosion.cpp">
       <Filter>Source Files\Game\objects\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioBar.cpp">
+      <Filter>Source Files\Game\Audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="Explosion.h">
       <Filter>Header Files\Game\objects\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioBar.h">
+      <Filter>Header Files\Game\Audio</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

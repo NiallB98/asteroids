@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Window.h"
+#include "AudioBar.h"
 
 class Audio
 {
@@ -45,11 +46,9 @@ private:
 
 	void load();
 
-	sf::RectangleShape volumeBarForeground;
-	sf::RectangleShape volumeBarBackground;
-	void initShapes();
-	void drawVolume(Window&);
-	void drawMute(Window&);
+	std::vector<AudioBar> audioBars = std::vector<AudioBar>(0);
+	bool showNewAudioBar = false;
+	void showAudioBar(sf::Vector2f, sf::Clock&);
 
 public:
 	Audio();
@@ -68,4 +67,7 @@ public:
 	void toggleMute();
 
 	void draw(Window&);
+
+	void update(sf::Vector2f, sf::Clock&);
+	void postUpdate();
 };
