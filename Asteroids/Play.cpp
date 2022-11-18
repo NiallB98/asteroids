@@ -11,6 +11,16 @@ Play::Play()
 	initProjectiles();
 }
 
+Play::Play(Audio& audio, sf::Vector2f windowDims)
+{
+	updateWindowDimensions(windowDims);
+	initPlayer();
+	initAsteroids();
+	initProjectiles();
+
+	audio.playGameStart();
+}
+
 Play::Play(Audio& audio, sf::Vector2f windowDims, int num)
 {
 	updateWindowDimensions(windowDims);
@@ -49,26 +59,13 @@ void Play::respawnPlayer(sf::Clock clock)
 void Play::initAsteroids(int num)
 {
 	asteroids.reserve(maxAsteroids);
-	asteroids = std::vector<Asteroid>(num);
-
-	// Setting asteroids to start at random positions
-	float minX = 0.f;
-	float maxX = windowDimensions.x;
-	float minY = 0.f;
-	float maxY = windowDimensions.y;
-
-	for (int i = 0; i < asteroids.size(); i++)
-	{
-		float randX = static_cast<float>(rand() % static_cast<int>(maxX - minX)) + minX;
-		float randY = static_cast<float>(rand() % static_cast<int>(maxY - minY)) + minY;
-
-		asteroids[i].setPos(sf::Vector2f(randX, randY));
-	}
+	spawnAsteroids(num);
+	startingAsteroids = num;
 }
 
 void Play::initAsteroids()
 {
-	initAsteroids(5);
+	initAsteroids(startingAsteroids);
 }
 
 void Play::initProjectiles()
@@ -100,6 +97,37 @@ void Play::drawProjectiles(Window& window)
 	// Enemy projectiles
 	for (int i = 0; i < enemyProjectiles.size(); i++)
 		enemyProjectiles[i].draw(window);
+}
+
+void Play::spawnAsteroids(int num)
+{
+	asteroids.clear();
+	asteroids = std::vector<Asteroid>(num);
+
+	// Setting asteroids to start at random positions
+	float minX = 0.f;
+	float maxX = windowDimensions.x;
+	float minY = 0.f;
+	float maxY = windowDimensions.y;
+
+
+	float randX, randY;
+	bool lockX, minOrMax;
+	for (int i = 0; i < asteroids.size(); i++)
+	{
+		randX = static_cast<float>(rand() % static_cast<int>(maxX - minX)) + minX;
+		randY = static_cast<float>(rand() % static_cast<int>(maxY - minY)) + minY;
+
+		lockX = rand() % 2;
+		minOrMax = rand() % 2;
+
+		if (lockX)
+			randX = minOrMax ? minX : maxX;
+		else
+			randY = minOrMax ? minY : maxY;
+
+		asteroids[i].setPos(sf::Vector2f(randX, randY));
+	}
 }
 
 void Play::drawObjects(Window& window)
