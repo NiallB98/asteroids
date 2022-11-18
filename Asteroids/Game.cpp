@@ -25,7 +25,7 @@ void Game::initLevel(int level)
 		levelMenu = new Menu(window.getDimensions());
 		break;
 	case PLAY:
-		levelPlay = new Play(audio, window.getDimensions(), 3);
+		levelPlay = new Play(audio, window.getDimensions());
 		break;
 	default:
 		break;

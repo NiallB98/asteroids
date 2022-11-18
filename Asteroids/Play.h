@@ -26,6 +26,7 @@ private:
 	std::vector<Explosion> explosions = std::vector<Explosion>(0);
 
 	int maxAsteroids = 42 * 3;
+	int startingAsteroids = 5;
 	int maxPlayerProjectiles = 128;
 	int maxEnemyProjectiles = 128;
 	int maxExplosions = maxAsteroids + 1;
@@ -37,6 +38,7 @@ private:
 
 	void initAsteroids();
 	void initAsteroids(int);
+	void spawnAsteroids(int);
 
 	void initProjectiles();
 
@@ -85,6 +87,7 @@ private:
 
 public:
 	Play();
+	Play(Audio&, sf::Vector2f);
 	Play(Audio&, sf::Vector2f, int);
 	~Play();
 
