@@ -301,5 +301,11 @@
     <Media Include="audio\effects\custom\explosion3.wav">
       <Filter>Resource Files\audio\effects\custom</Filter>
     </Media>
+    <Media Include="audio\effects\custom\explosion0.wav">
+      <Filter>Resource Files\audio\effects\custom</Filter>
+    </Media>
+    <Media Include="audio\effects\original\explosion0.wav">
+      <Filter>Resource Files\audio\effects\original</Filter>
+    </Media>
   </ItemGroup>
 </Project>
