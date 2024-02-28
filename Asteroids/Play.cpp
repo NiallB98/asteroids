@@ -191,8 +191,16 @@ void Play::updatePlayer()
 
 void Play::updateAsteroids()
 {
-	for (int i = 0; i < asteroids.size(); i++)
+	bool anyAlive = false;
+
+	for (int i = 0; i < asteroids.size(); i++) {
 		asteroids[i].update(windowDimensions, playerProjectiles);
+
+		anyAlive = anyAlive or asteroids[i].isAlive();
+	}
+
+	if (not anyAlive)
+		spawnAsteroids(startingAsteroids);
 }
 
 void Play::updateProjectiles()
