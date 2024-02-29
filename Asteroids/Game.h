@@ -17,8 +17,10 @@
 #include "Controls.h"
 #include "Audio.h"
 
-#define MENU 0
-#define PLAY 1
+enum class Levels {
+	MENU = 0,
+	PLAY
+};
 
 class Game
 {
@@ -30,15 +32,15 @@ private:
 
 	Audio audio;
 
-	// Levels
-	int currentLevel = 0;
+	Levels currentLevel{ Levels::MENU };
+
 	Play* levelPlay;
 	Menu* levelMenu;
 	void initLevels();
-	void initLevel(int);
+	void initLevel(Levels);
 
 	void levelChanging();
-	void changeLevel(int);
+	void changeLevel(Levels);
 
 	void pollGlobalEvents();
 
