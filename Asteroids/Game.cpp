@@ -13,18 +13,18 @@ Game::~Game()
 
 void Game::initLevels()
 {
-	initLevel(MENU);
-	initLevel(PLAY);
+	initLevel(Levels::MENU);
+	initLevel(Levels::PLAY);
 }
 
-void Game::initLevel(int level)
+void Game::initLevel(Levels level)
 {
 	switch (level)
 	{
-	case MENU:
+	case Levels::MENU:
 		levelMenu = new Menu(window.getDimensions());
 		break;
-	case PLAY:
+	case Levels::PLAY:
 		levelPlay = new Play(audio, window.getDimensions());
 		break;
 	default:
@@ -77,10 +77,10 @@ void Game::update()
 
 	switch (currentLevel)
 	{
-	case MENU:
+	case Levels::MENU:
 		levelMenu->update(event, controls);
 		break;
-	case PLAY:
+	case Levels::PLAY:
 		levelPlay->update(event, audio, clock, controls);
 		break;
 	default:
@@ -88,15 +88,15 @@ void Game::update()
 	}
 }
 
-void Game::changeLevel(int level)
+void Game::changeLevel(Levels level)
 {
 	switch (currentLevel)
 	{
-	case MENU:
+	case Levels::MENU:
 		delete levelMenu;
 		levelMenu = NULL;
 		break;
-	case PLAY:
+	case Levels::PLAY:
 		delete levelPlay;
 		levelPlay = NULL;
 		break;
@@ -110,11 +110,11 @@ void Game::levelChanging()
 {
 	switch (currentLevel)
 	{
-	case MENU:
+	case Levels::MENU:
 		if (levelMenu->playNow())
-			changeLevel(PLAY);
+			changeLevel(Levels::PLAY);
 		break;
-	case PLAY:
+	case Levels::PLAY:
 		break;
 	default:
 		break;
@@ -127,11 +127,11 @@ void Game::postUpdate()
 	
 	switch (currentLevel)
 	{
-	case MENU:
+	case Levels::MENU:
 		levelMenu->postUpdate();
 		levelChanging();
 		break;
-	case PLAY:
+	case Levels::PLAY:
 		levelPlay->postUpdate(clock, audio);
 		levelChanging();
 		break;
@@ -160,10 +160,10 @@ void Game::render()
 
 	switch (currentLevel)
 	{
-	case MENU:
+	case Levels::MENU :
 		levelMenu->draw(window);
 		break;
-	case PLAY:
+	case Levels::PLAY:
 		levelPlay->draw(window);
 		break;
 	default:
