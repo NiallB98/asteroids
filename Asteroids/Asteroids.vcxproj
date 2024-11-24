@@ -168,6 +168,7 @@ DEL "$(TargetDir)*.pdb" /Q</Command>
     <ClCompile Include="MenuControlHint.cpp" />
     <ClCompile Include="MenuControls.cpp" />
     <ClCompile Include="movement.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="Play.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Projectile.cpp" />
@@ -193,6 +194,7 @@ DEL "$(TargetDir)*.pdb" /Q</Command>
     <ClInclude Include="MenuControlHint.h" />
     <ClInclude Include="MenuControls.h" />
     <ClInclude Include="movement.h" />
+    <ClInclude Include="Object.h" />
     <ClInclude Include="Play.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Projectile.h" />

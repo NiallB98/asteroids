@@ -1,15 +1,6 @@
 #pragma once
-
-#include "Window.h"
-
-class Asteroid;
-class Projectile;
-class Controls;
-class Audio;
-
-class Player
+class Object
 {
-private:
 	bool alive = true;
 	bool invincible = true;
 	float invincibleDurationSecs = 3.f;
@@ -54,12 +45,6 @@ private:
 	bool collisionWithAsteroids(std::vector<Asteroid>&);
 	bool collisionChecks(std::vector<Asteroid>&);
 
-	// Firing projectiles
-	sf::Vector2f cannonPos;
-	float fireCooldownSeconds = 0.5f;
-	float lastFiredSeconds = -fireCooldownSeconds / 2.f;
-	void fireProjectile(std::vector<Projectile>&, Audio&, sf::Clock&);
-
 public:
 	Player();
 	Player(sf::Clock);
@@ -75,7 +60,6 @@ public:
 	void accelerate();
 
 	// Updating and events
-	void pollEvents(sf::Event&, Audio&, sf::Clock&, Controls&, std::vector<Projectile>&);
 	void update(sf::Vector2f, std::vector<Asteroid>&);
 	void postUpdate(sf::Clock&);
 
